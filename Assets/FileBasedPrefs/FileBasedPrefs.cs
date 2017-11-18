@@ -7,7 +7,7 @@ public class FileBasedPrefs
 {
     private const string SaveFileName = "saveData.txt";
 
-    #region Public Get and Set Data methods
+    #region Public Get, Set and Util methods
 
     public static void SetString(string key, string value)
     {
@@ -42,26 +42,9 @@ public class FileBasedPrefs
         return saveFile.GetFloatFromKey(key, defaultValue);
     }
 
-    static void AddData(string key, object value)
-    {
-        var saveFile = GetSaveFile();
-        saveFile.UpdateOrAddData(key, value);
-        SaveSaveFile(saveFile); 
-    }
-
-    #endregion
-
-    #region File Utils
-
     public static void OverwriteLocalSaveFile(string data)
     {
         WriteToSaveFile(data);
-    }
-
-    public static string GetSaveFileAsJson()
-    {
-        CheckForSaveFile();
-        return File.ReadAllText(GetSaveFilePath());
     }
 
     public static void DeleteAll()
@@ -72,6 +55,23 @@ public class FileBasedPrefs
     public static string GetSaveFilePath()
     {
         return Path.Combine(Application.persistentDataPath, SaveFileName);
+    }
+
+    public static string GetSaveFileAsJson()
+    {
+        CheckForSaveFile();
+        return File.ReadAllText(GetSaveFilePath());
+    }
+
+    #endregion
+
+    #region File Utils
+
+    private static void AddData(string key, object value)
+    {
+        var saveFile = GetSaveFile();
+        saveFile.UpdateOrAddData(key, value);
+        SaveSaveFile(saveFile);
     }
 
     private static void CheckForSaveFile()
