@@ -24,11 +24,11 @@ At the top of the script FileBasedPrefs.cs you can specify what name you would l
 
 #### Save File Encryption
 
-I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of that script. Please note, this is not secure encription, just a small method to stop most users from cheating.
+I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of that script. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from cheating.
 
 ## Usage
 
-You must include the namespace like so at the top of any script you use this in:
+You must include the STF.FileBasedPrefs namespace at the top of any script you use this in:
 ```
 using STF.FileBasedPrefs;
 ```
