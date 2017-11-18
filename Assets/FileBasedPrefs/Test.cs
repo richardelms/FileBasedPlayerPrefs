@@ -7,9 +7,17 @@ public class Test : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-	    Debug.Log(FileBasedPrefs.GetSaveFileAsJson());
-	    Debug.Log(FileBasedPrefs.GetSaveFilePath());
+        FileBasedPrefs.SetString("Test","valueeee");
+        FileBasedPrefs.SetInt("Test", 555);
+        FileBasedPrefs.SetFloat("Float", 555.444f);
+        Invoke("Result",1);
     }
 
+    void Result()
+    {
+        Debug.Log(FileBasedPrefs.GetString("Test","Failed"));
+        Debug.Log(FileBasedPrefs.GetInt("Test", 0));
+        Debug.Log(FileBasedPrefs.GetFloat("Test", 0));
+    }
 
 }

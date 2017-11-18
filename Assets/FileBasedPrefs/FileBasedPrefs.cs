@@ -7,46 +7,46 @@ public class FileBasedPrefs
 {
     private const string SaveFileName = "saveData.txt";
 
-    #region Public Get Set Data methods
+    #region Public Get and Set Data methods
 
     public static void SetString(string key, string value)
     {
-        var saveFile = GetSaveFile();
-        saveFile.UpdateOrAddData(key, value);
-        SaveSaveFile(saveFile);
+        AddData(key,value);
     }
 
     public static string GetString(string key, string defaultValue)
     {
         var saveFile = GetSaveFile();
-        if (saveFile.HasKey(key))
-        {
-            return saveFile.GetValueFromKey(key);
-        }
-        else
-        {
-            return defaultValue;
-        }
+        return saveFile.GetStringFromKey(key, defaultValue);
     }
 
     public static void SetInt(string key, int value)
     {
-        SetString(key, value.ToString());
+        AddData(key, value);
     }
 
     public static int GetInt(string key, int defaultValue)
     {
-        return int.Parse(GetString(key, defaultValue.ToString()));
+        var saveFile = GetSaveFile();
+        return saveFile.GetIntFromKey(key, defaultValue);
     }
 
     public static void SetFloat(string key, float value)
     {
-        SetString(key, value.ToString());
+        AddData(key, value);
     }
 
     public static float GetFloat(string key, float defaultValue)
     {
-        return float.Parse(GetString(key, defaultValue.ToString()));
+        var saveFile = GetSaveFile();
+        return saveFile.GetFloatFromKey(key, defaultValue);
+    }
+
+    static void AddData(string key, object value)
+    {
+        var saveFile = GetSaveFile();
+        saveFile.UpdateOrAddData(key, value);
+        SaveSaveFile(saveFile); 
     }
 
     #endregion
@@ -98,82 +98,6 @@ public class FileBasedPrefs
 
     #endregion
 
-    #region SaveFileDataStructure
-
-    [Serializable]
-    public class SaveFile
-    {
-        public Item[] Data = new Item[0];
-
-        [Serializable]
-        public class Item
-        {
-            public string key;
-            public string value;
-
-            public Item(string K, string V)
-            {
-                key = K;
-                value = V;
-            }
-        }
-
-        public string GetValueFromKey(string key)
-        {
-            for (int i = 0; i < Data.Length; i++)
-            {
-                if (Data[i].key.Equals(key))
-                {
-                    return (Data[i].value);
-                }
-            }
-            return string.Empty;
-        }
-
-        public void UpdateOrAddData(string key, string value)
-        {
-            if (HasKey(key))
-            {
-                SetValueForExistingKey(key, value);
-            }
-            else
-            {
-                SetValueForNewKey(key, value);
-            }
-        }
-
-        private void SetValueForNewKey(string key, string value)
-        {
-            var dataAsList = Data.ToList();
-            dataAsList.Add(new Item(key, value));
-            Data = dataAsList.ToArray();
-        }
-
-        private void SetValueForExistingKey(string key, string value)
-        {
-            for (int i = 0; i < Data.Length; i++)
-            {
-                if (Data[i].key.Equals(key))
-                {
-                    Data[i].value = value;
-                }
-            }
-        }
-
-        public bool HasKey(string key)
-        {
-            for (int i = 0; i < Data.Length; i++)
-            {
-                if (Data[i].key.Equals(key))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
-    #endregion
 }
 
 
