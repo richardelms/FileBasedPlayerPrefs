@@ -12,25 +12,26 @@ Keys are type specific, meaning that if you save a string under the key "key1" i
 
 Only tested on Windows and OSX standalone, might work on others but didnt get the time to test yet.
 
-## TODO
+## Installation
 
-Add Suffix support for multiple save files at a time.
-
-Add encryption support.
-
+Grab the latest unity package from the releases tab of this repo and import it into your project.
 
 ## Configuration
 
-Save File Name
+#### Save File Name
 
 At the top of the script FileBasedPrefs.cs you can specify what name you would like your save file to have in the string SaveFileName.
 
-Save File Encryption
+#### Save File Encryption
 
 I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of that script. Please note, this is not secure encription, just a small method to stop most users from cheating.
 
-## Example Usage
+## Usage
 
+You must include the namespace like so at the top of any script you use this in:
+```
+using STF.FileBasedPrefs;
+```
 ### Get and Set
 ```
     FileBasedPrefs.SetString("TestString","test");
