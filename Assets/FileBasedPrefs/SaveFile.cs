@@ -73,7 +73,7 @@ public class SaveFile
         {
             if (FloatData[i].Key.Equals(key))
             {
-                return FloatData[i].Value;
+                return (float)FloatData[i].Value;
             }
         }
         return defaultValue;
@@ -112,8 +112,6 @@ public class SaveFile
             FloatData = dataAsList.ToArray();
         }
     }
-
-
 
     private void SetValueForExistingKey(string key, object value)
     {

@@ -9,7 +9,7 @@ public class Test : MonoBehaviour {
 	{
         FileBasedPrefs.SetString("Test","valueeee");
         FileBasedPrefs.SetInt("Test", 555);
-        FileBasedPrefs.SetFloat("Float", 555.444f);
+        FileBasedPrefs.SetFloat("Test", 555.444f);
         Invoke("Result",1);
     }
 
@@ -18,6 +18,10 @@ public class Test : MonoBehaviour {
         Debug.Log(FileBasedPrefs.GetString("Test","Failed"));
         Debug.Log(FileBasedPrefs.GetInt("Test", 0));
         Debug.Log(FileBasedPrefs.GetFloat("Test", 0));
+
+        Debug.Log(FileBasedPrefs.GetString("fff", "Failed"));
+        Debug.Log(FileBasedPrefs.GetInt("fff", 0));
+        Debug.Log(FileBasedPrefs.GetFloat("fff", 0));
     }
 
 }

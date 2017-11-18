@@ -53,6 +53,11 @@ public class FileBasedPrefs
 
     #region File Utils
 
+    public static void OverwriteLocalSaveFile(string data)
+    {
+        WriteToSaveFile(data);
+    }
+
     public static string GetSaveFileAsJson()
     {
         CheckForSaveFile();
@@ -61,7 +66,7 @@ public class FileBasedPrefs
 
     public static void DeleteAll()
     {
-        WriteToFile(JsonUtility.ToJson(new SaveFile()));
+        WriteToSaveFile(JsonUtility.ToJson(new SaveFile()));
     }
 
     public static string GetSaveFilePath()
@@ -74,11 +79,11 @@ public class FileBasedPrefs
         var fileExists = File.Exists(GetSaveFilePath());
         if (!fileExists)
         {
-            WriteToFile(JsonUtility.ToJson(new SaveFile()));
+            WriteToSaveFile(JsonUtility.ToJson(new SaveFile()));
         }
     }
 
-    private static void WriteToFile(string data)
+    private static void WriteToSaveFile(string data)
     {
         var tw = new StreamWriter(GetSaveFilePath());
         tw.Write(data);
@@ -87,7 +92,7 @@ public class FileBasedPrefs
 
     private static void SaveSaveFile(SaveFile data)
     {
-        WriteToFile(JsonUtility.ToJson(data));
+        WriteToSaveFile(JsonUtility.ToJson(data));
     }
 
     private static SaveFile GetSaveFile()
