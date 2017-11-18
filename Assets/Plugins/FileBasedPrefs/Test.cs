@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using STF.FileBasedPrefs;
 using UnityEngine;
 
 public class Test : MonoBehaviour {
