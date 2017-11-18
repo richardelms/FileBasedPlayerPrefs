@@ -6,6 +6,7 @@ public class SaveFile
     public StringItem[] StringData = new StringItem[0];
     public IntItem[] IntData = new IntItem[0];
     public FloatItem[] FloatData = new FloatItem[0];
+    public BoolItem[] BoolData = new BoolItem[0];
 
     [Serializable]
     public class StringItem
@@ -43,6 +44,18 @@ public class SaveFile
         }
     }
 
+    [Serializable]
+    public class BoolItem
+    {
+        public string Key;
+        public bool Value;
+        public BoolItem(string K, bool V)
+        {
+            Key = K;
+            Value = V;
+        }
+    }
+
     public string GetStringFromKey(string key, string defaultValue)
     {
         for (int i = 0; i < StringData.Length; i++)
@@ -73,7 +86,19 @@ public class SaveFile
         {
             if (FloatData[i].Key.Equals(key))
             {
-                return (float)FloatData[i].Value;
+                return FloatData[i].Value;
+            }
+        }
+        return defaultValue;
+    }
+
+    public bool GetBoolFromKey(string key, bool defaultValue)
+    {
+        for (int i = 0; i < BoolData.Length; i++)
+        {
+            if (BoolData[i].Key.Equals(key))
+            {
+                return BoolData[i].Value;
             }
         }
         return defaultValue;
@@ -111,6 +136,12 @@ public class SaveFile
             dataAsList.Add(new FloatItem(key, (float)value));
             FloatData = dataAsList.ToArray();
         }
+        if (value is bool)
+        {
+            var dataAsList = BoolData.ToList();
+            dataAsList.Add(new BoolItem(key, (bool)value));
+            BoolData = dataAsList.ToArray();
+        }
     }
 
     private void SetValueForExistingKey(string key, object value)
@@ -146,6 +177,16 @@ public class SaveFile
                 }
             }
         }
+        if (value is bool)
+        {
+            for (int i = 0; i < BoolData.Length; i++)
+            {
+                if (BoolData[i].Key.Equals(key))
+                {
+                    BoolData[i].Value = (bool)value;
+                }
+            }
+        }
     }
 
     public bool HasKey(string key, object value)
@@ -178,6 +219,17 @@ public class SaveFile
             for (int i = 0; i < FloatData.Length; i++)
             {
                 if (FloatData[i].Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+        }
+
+        if (value is bool)
+        {
+            for (int i = 0; i < BoolData.Length; i++)
+            {
+                if (BoolData[i].Key.Equals(key))
                 {
                     return true;
                 }

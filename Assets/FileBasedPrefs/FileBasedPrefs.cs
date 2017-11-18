@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using UnityEngine;
 
-public class FileBasedPrefs
+public static class FileBasedPrefs
 {
     private const string SaveFileName = "saveData.txt";
 
@@ -11,7 +9,7 @@ public class FileBasedPrefs
 
     public static void SetString(string key, string value)
     {
-        AddData(key,value);
+        AddData(key, value);
     }
 
     public static string GetString(string key, string defaultValue)
@@ -40,6 +38,17 @@ public class FileBasedPrefs
     {
         var saveFile = GetSaveFile();
         return saveFile.GetFloatFromKey(key, defaultValue);
+    }
+
+    public static void SetBool(string key, bool value)
+    {
+        AddData(key, value);
+    }
+
+    public static bool GetBool(string key, bool defaultValue)
+    {
+        var saveFile = GetSaveFile();
+        return saveFile.GetBoolFromKey(key, defaultValue);
     }
 
     public static void OverwriteLocalSaveFile(string data)
@@ -102,7 +111,6 @@ public class FileBasedPrefs
     }
 
     #endregion
-
 }
 
 
