@@ -24,7 +24,7 @@ At the top of the script FileBasedPrefs.cs you can specify what name you would l
 
 #### Save File Encryption
 
-I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of that script. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from cheating.
+I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data.
 
 ## Usage
 
