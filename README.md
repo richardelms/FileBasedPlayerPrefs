@@ -1,6 +1,6 @@
 # FileBasedPlayerPrefs
 
-This small library is designed to act exactly like Unity PlayerPrefs, but saves all prefs in JSON format to a file in the Application.persistentDataPath.
+This small Unity library is designed to act exactly like Unity PlayerPrefs, but saves all prefs in JSON format to a file in the Application.persistentDataPath.
 
 This makes it easier to save your save game data in places like the Steam Cloud or your own backend etc..
 
