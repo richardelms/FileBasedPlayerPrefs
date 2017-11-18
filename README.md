@@ -18,6 +18,17 @@ Add Suffix support for multiple save files at a time.
 
 Add encryption support.
 
+
+## Configeration
+
+Save File Name
+
+At the top of the script FileBasedPrefs.cs you can specify what name you would like your save file to have in the string SaveFileName.
+
+Save File Encryption
+
+I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of that script. Please note, this is not secure encription, just a small method to stop most users from cheating.
+
 ## Example Usage
 
 ### Get and Set
