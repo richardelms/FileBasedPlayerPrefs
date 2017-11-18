@@ -16,6 +16,8 @@ Only tested on Windows and OSX standalone, might work on others but didnt get th
 
 Add Suffix support for multiple save files at a time.
 
+Add encryption support.
+
 ## Example Usage
 
 ### Get and Set
