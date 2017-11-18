@@ -19,7 +19,7 @@ Add Suffix support for multiple save files at a time.
 Add encryption support.
 
 
-## Configeration
+## Configuration
 
 Save File Name
 
