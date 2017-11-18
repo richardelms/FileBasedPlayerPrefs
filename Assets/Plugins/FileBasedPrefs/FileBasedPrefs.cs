@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using UnityEngine;
-using System.Runtime.Serialization.Formatters.Binary;
 namespace STF.FileBasedPrefs
 {
     public static class FileBasedPrefs
@@ -109,7 +108,7 @@ namespace STF.FileBasedPrefs
 
         static string JsonScrambler(string data)
         {
-            string codeword = "word";
+            string codeword = "fjnskabasflbdcj";
             string res = "";
             for (int i = 0; i < data.Length; i++)
             {
