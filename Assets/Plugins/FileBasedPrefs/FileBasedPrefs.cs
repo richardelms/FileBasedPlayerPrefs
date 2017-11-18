@@ -1,10 +1,12 @@
 ﻿using System.IO;
 using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace STF.FileBasedPrefs
 {
     public static class FileBasedPrefs
     {
         private const string SaveFileName = "saveData.txt";
+        private const bool ScrambleSaveData = true;
 
         #region Public Get, Set and Util methods
 
@@ -89,15 +91,31 @@ namespace STF.FileBasedPrefs
             var fileExists = File.Exists(GetSaveFilePath());
             if (!fileExists)
             {
-                WriteToSaveFile(JsonUtility.ToJson(new SaveFile()));
+                var blankSaveFile = JsonUtility.ToJson(new SaveFile());
+                WriteToSaveFile(blankSaveFile);
             }
         }
 
         private static void WriteToSaveFile(string data)
         {
             var tw = new StreamWriter(GetSaveFilePath());
+            if(ScrambleSaveData)
+            {
+                data = JsonScrambler(data);
+            }
             tw.Write(data);
             tw.Close();
+        }
+
+        static string JsonScrambler(string data)
+        {
+            string codeword = "word";
+            string res = "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                res += (char)(data[i] ^ codeword[i % codeword.Length]);
+            }
+            return res;
         }
 
         private static void SaveSaveFile(SaveFile data)
@@ -108,7 +126,12 @@ namespace STF.FileBasedPrefs
         private static SaveFile GetSaveFile()
         {
             CheckForSaveFile();
-            return JsonUtility.FromJson<SaveFile>(File.ReadAllText(GetSaveFilePath()));
+            var saveFileText = File.ReadAllText(GetSaveFilePath());
+            if (ScrambleSaveData)
+            {
+                saveFileText = JsonScrambler(saveFileText);
+            }
+            return JsonUtility.FromJson<SaveFile>(saveFileText);
         }
 
         #endregion

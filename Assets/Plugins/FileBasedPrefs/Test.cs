@@ -23,4 +23,5 @@ public class Test : MonoBehaviour {
         Debug.Log(FileBasedPrefs.GetBool("Test", false));
     }
 
+
 }
