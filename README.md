@@ -10,7 +10,7 @@ Avalable types: string, int, float and bool.
 
 Keys are type specific, meaning that if you save a string under the key "key1" it will not be overridden when you save an int with the same key "key1";
 
-Only tested on Windows and OSX standalone, might work on others but didnt get the time to test yet.
+Tested on Windows, OSX and Android.
 
 ## Installation
 
