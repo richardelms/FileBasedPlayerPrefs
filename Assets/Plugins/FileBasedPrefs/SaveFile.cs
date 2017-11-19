@@ -58,49 +58,46 @@ namespace STF.FileBasedPrefs
             }
         }
 
-        public string GetStringFromKey(string key, string defaultValue)
+        public object GetValueFromKey(string key, object defaultValue)
         {
-            for (int i = 0; i < StringData.Length; i++)
+            if (defaultValue is string)
             {
-                if (StringData[i].Key.Equals(key))
+                for (int i = 0; i < StringData.Length; i++)
                 {
-                    return StringData[i].Value;
+                    if (StringData[i].Key.Equals(key))
+                    {
+                        return StringData[i].Value;
+                    }
                 }
             }
-            return defaultValue;
-        }
-
-        public int GetIntFromKey(string key, int defaultValue)
-        {
-            for (int i = 0; i < IntData.Length; i++)
+            if (defaultValue is int)
             {
-                if (IntData[i].Key.Equals(key))
+                for (int i = 0; i < IntData.Length; i++)
                 {
-                    return IntData[i].Value;
+                    if (IntData[i].Key.Equals(key))
+                    {
+                        return IntData[i].Value;
+                    }
                 }
             }
-            return defaultValue;
-        }
-
-        public float GetFloatFromKey(string key, float defaultValue)
-        {
-            for (int i = 0; i < FloatData.Length; i++)
+            if (defaultValue is float)
             {
-                if (FloatData[i].Key.Equals(key))
+                for (int i = 0; i < FloatData.Length; i++)
                 {
-                    return FloatData[i].Value;
+                    if (FloatData[i].Key.Equals(key))
+                    {
+                        return FloatData[i].Value;
+                    }
                 }
             }
-            return defaultValue;
-        }
-
-        public bool GetBoolFromKey(string key, bool defaultValue)
-        {
-            for (int i = 0; i < BoolData.Length; i++)
+            if (defaultValue is bool)
             {
-                if (BoolData[i].Key.Equals(key))
+                for (int i = 0; i < BoolData.Length; i++)
                 {
-                    return BoolData[i].Value;
+                    if (BoolData[i].Key.Equals(key))
+                    {
+                        return BoolData[i].Value;
+                    }
                 }
             }
             return defaultValue;

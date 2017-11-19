@@ -11,46 +11,42 @@ namespace STF.FileBasedPrefs
 
         public static void SetString(string key, string value)
         {
-            AddData(key, value);
+            AddDataToSaveFile(key, value);
         }
 
         public static string GetString(string key, string defaultValue)
         {
-            var saveFile = GetSaveFile();
-            return saveFile.GetStringFromKey(key, defaultValue);
+            return (string)GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void SetInt(string key, int value)
         {
-            AddData(key, value);
+            AddDataToSaveFile(key, value);
         }
 
         public static int GetInt(string key, int defaultValue)
         {
-            var saveFile = GetSaveFile();
-            return saveFile.GetIntFromKey(key, defaultValue);
+            return (int)GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void SetFloat(string key, float value)
         {
-            AddData(key, value);
+            AddDataToSaveFile(key, value);
         }
 
         public static float GetFloat(string key, float defaultValue)
         {
-            var saveFile = GetSaveFile();
-            return saveFile.GetFloatFromKey(key, defaultValue);
+            return (float)GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void SetBool(string key, bool value)
         {
-            AddData(key, value);
+            AddDataToSaveFile(key, value);
         }
 
         public static bool GetBool(string key, bool defaultValue)
         {
-            var saveFile = GetSaveFile();
-            return saveFile.GetBoolFromKey(key, defaultValue);
+            return (bool)GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void OverwriteLocalSaveFile(string data)
@@ -78,11 +74,17 @@ namespace STF.FileBasedPrefs
 
         #region File Utils
 
-        private static void AddData(string key, object value)
+        private static void AddDataToSaveFile(string key, object value)
         {
             var saveFile = GetSaveFile();
             saveFile.UpdateOrAddData(key, value);
             SaveSaveFile(saveFile);
+        }
+
+        private static object GetDataFromSaveFile(string key, object defaultValue)
+        {
+            var saveFile = GetSaveFile();
+            return saveFile.GetValueFromKey(key, defaultValue);
         }
 
         private static void CheckForSaveFile()

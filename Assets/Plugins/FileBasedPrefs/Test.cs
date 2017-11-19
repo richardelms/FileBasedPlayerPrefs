@@ -8,9 +8,9 @@ public class Test : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-        FileBasedPrefs.SetString("Test","zzz");
-        FileBasedPrefs.SetInt("Test", 222);
-        FileBasedPrefs.SetFloat("Test", 555.1f);
+        FileBasedPrefs.SetString("Test","ddd");
+        FileBasedPrefs.SetInt("Test", 333);
+        FileBasedPrefs.SetFloat("Test", 333.1f);
         FileBasedPrefs.SetBool("Test", true);
         Invoke("Result", 0.5f);
     }
