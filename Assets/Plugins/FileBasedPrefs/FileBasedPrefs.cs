@@ -7,14 +7,16 @@ public static class FileBasedPrefs
     private const string SaveFileName = "saveData.txt";
     private const bool ScrambleSaveData = true;
 
+    const string String_Empty = "";
+
     #region Public Get, Set and Util methods
 
-    public static void SetString(string key, string value = default(string))
+    public static void SetString(string key, string value = String_Empty)
     {
         AddDataToSaveFile(key, value);
     }
 
-    public static string GetString(string key, string defaultValue = default(string))
+    public static string GetString(string key, string defaultValue = String_Empty)
     {
         return (string) GetDataFromSaveFile(key, defaultValue);
     }
@@ -54,6 +56,26 @@ public static class FileBasedPrefs
         return GetSaveFile().HasKey(key);
     }
 
+    public static bool HasKeyForString(string key)
+    {
+        return GetSaveFile().HasKeyFromObject(key, string.Empty);
+    }
+
+    public static bool HasKeyForInt(string key)
+    {
+        return GetSaveFile().HasKeyFromObject(key, default(int));
+    }
+
+    public static bool HasKeyForFloat(string key)
+    {
+        return GetSaveFile().HasKeyFromObject(key, default(float));
+    }
+
+    public static bool HasKeyForBool(string key)
+    {
+        return GetSaveFile().HasKeyFromObject(key, default(bool));
+    }
+
     public static void DeleteKey(string key)
     {
         var saveFile = GetSaveFile();
@@ -61,14 +83,42 @@ public static class FileBasedPrefs
         SaveSaveFile(saveFile);
     }
 
-    public static void OverwriteLocalSaveFile(string data)
+    public static void DeleteString(string key)
     {
-        WriteToSaveFile(data);
+        var saveFile = GetSaveFile();
+        saveFile.DeleteString(key);
+        SaveSaveFile(saveFile);
+    }
+
+    public static void DeleteInt(string key)
+    {
+        var saveFile = GetSaveFile();
+        saveFile.DeleteInt(key);
+        SaveSaveFile(saveFile);
+    }
+
+    public static void DeleteFloat(string key)
+    {
+        var saveFile = GetSaveFile();
+        saveFile.DeleteFloat(key);
+        SaveSaveFile(saveFile);
+    }
+
+    public static void DeleteBool(string key)
+    {
+        var saveFile = GetSaveFile();
+        saveFile.DeleteBool(key);
+        SaveSaveFile(saveFile);
     }
 
     public static void DeleteAll()
     {
         WriteToSaveFile(JsonUtility.ToJson(new SaveFile()));
+    }
+
+    public static void OverwriteLocalSaveFile(string data)
+    {
+        WriteToSaveFile(data);
     }
 
     public static string GetSaveFilePath()

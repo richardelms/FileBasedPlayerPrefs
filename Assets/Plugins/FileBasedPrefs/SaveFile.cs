@@ -280,6 +280,58 @@ public class SaveFile
         }
     }
 
+    public void DeleteString(string key)
+    {
+        for (int i = 0; i < StringData.Length; i++)
+        {
+            if (StringData[i].Key.Equals(key))
+            {
+                var dataAsList = StringData.ToList();
+                dataAsList.RemoveAt(i);
+                StringData = dataAsList.ToArray();
+            }
+        }
+    }
+
+    public void DeleteInt(string key)
+    {
+        for (int i = 0; i < IntData.Length; i++)
+        {
+            if (IntData[i].Key.Equals(key))
+            {
+                var dataAsList = IntData.ToList();
+                dataAsList.RemoveAt(i);
+                IntData = dataAsList.ToArray();
+            }
+        }
+    }
+
+    public void DeleteFloat(string key)
+    {
+        for (int i = 0; i < FloatData.Length; i++)
+        {
+            if (FloatData[i].Key.Equals(key))
+            {
+                var dataAsList = FloatData.ToList();
+                dataAsList.RemoveAt(i);
+                FloatData = dataAsList.ToArray();
+            }
+        }
+    }
+
+    public void DeleteBool(string key)
+    {
+        for (int i = 0; i < BoolData.Length; i++)
+        {
+            if (BoolData[i].Key.Equals(key))
+            {
+                var dataAsList = BoolData.ToList();
+                dataAsList.RemoveAt(i);
+                BoolData = dataAsList.ToArray();
+            }
+        }
+    }
+
     public bool HasKey(string key)
     {
         for (int i = 0; i < StringData.Length; i++)

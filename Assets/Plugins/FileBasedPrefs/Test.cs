@@ -4,22 +4,183 @@ using UnityEngine;
 
 public class Test : MonoBehaviour {
 
-	// Use this for initialization
 	void Start ()
 	{
-        FileBasedPrefs.SetString("Test","ddd");
-        FileBasedPrefs.SetInt("Test", 333);
-        FileBasedPrefs.SetFloat("Test", 333.1f);
-        FileBasedPrefs.SetBool("Test", true);
-        Invoke("Result", 0.5f);
+        FileBasedPrefs.DeleteAll();
+        Invoke("StringTests", 0.25f);
+        Invoke("IntTests", 0.5f);
+        Invoke("FloatTests", 0.75f);
+        Invoke("BoolTests", 1f);
+        Invoke("GeneralTests", 1.25f);
     }
 
-    void Result()
+
+
+
+    void StringTests()
     {
-        Debug.Log(FileBasedPrefs.GetString("Test","Failed"));
-        Debug.Log(FileBasedPrefs.GetInt("Test", 0));
-        Debug.Log(FileBasedPrefs.GetFloat("Test", 0));
-        Debug.Log(FileBasedPrefs.GetBool("Test", false));
+        FileBasedPrefs.SetString("test", "test");
+       
+        if(!FileBasedPrefs.GetString("test").Equals("test"))
+        {
+            Debug.LogException(new System.Exception("SetStringFailed"));
+            return;
+        }
+
+        FileBasedPrefs.SetString("test", "test2");
+
+        if (!FileBasedPrefs.GetString("test").Equals("test2"))
+        {
+            Debug.LogException(new System.Exception("ReplaceStringFailed"));
+            return;
+        }
+
+        if (!FileBasedPrefs.HasKeyForString("test"))
+        {
+            Debug.LogException(new System.Exception("HasKeyForStringFailed"));
+            return;
+        }
+
+        FileBasedPrefs.DeleteString("test");
+
+        if (!FileBasedPrefs.GetString("test").Equals(""))
+        {
+            Debug.LogException(new System.Exception("DeleteStringFailed"));
+            return;
+        }
+
+        Debug.Log("String Tests Passed");
+
+    }
+
+    void IntTests()
+    {
+        FileBasedPrefs.SetInt("test", 1);
+
+        if (!FileBasedPrefs.GetInt("test").Equals(1))
+        {
+            Debug.LogException(new System.Exception("SetIntFailed"));
+            return;
+        }
+
+        FileBasedPrefs.SetInt("test", 2);
+
+        if (!FileBasedPrefs.GetInt("test").Equals(2))
+        {
+            Debug.LogException(new System.Exception("ReplaceIntFailed"));
+            return;
+        }
+
+        if (!FileBasedPrefs.HasKeyForInt("test"))
+        {
+            Debug.LogException(new System.Exception("HasKeyForIntFailed"));
+            return;
+        }
+
+        FileBasedPrefs.DeleteInt("test");
+
+        if (!FileBasedPrefs.GetInt("test").Equals(0))
+        {
+            Debug.LogException(new System.Exception("DeleteIntFailed"));
+            return;
+        }
+
+        Debug.Log("Int Tests Passed");
+
+    }
+
+    void FloatTests()
+    {
+        FileBasedPrefs.SetFloat("test", 1);
+
+        if (!FileBasedPrefs.GetFloat("test").Equals(1))
+        {
+            Debug.LogException(new System.Exception("SetFloatFailed"));
+            return;
+        }
+
+        FileBasedPrefs.SetFloat("test", 2);
+
+        if (!FileBasedPrefs.GetFloat("test").Equals(2))
+        {
+            Debug.LogException(new System.Exception("ReplaceFloatFailed"));
+            return;
+        }
+
+        if (!FileBasedPrefs.HasKeyForFloat("test"))
+        {
+            Debug.LogException(new System.Exception("HasKeyForFloatFailed"));
+            return;
+        }
+
+        FileBasedPrefs.DeleteFloat("test");
+
+        if (!FileBasedPrefs.GetFloat("test").Equals(0))
+        {
+            Debug.LogException(new System.Exception("DeleteFloatFailed"));
+            return;
+        }
+
+        Debug.Log("Float Tests Passed");
+
+    }
+
+    void BoolTests()
+    {
+        FileBasedPrefs.SetBool("test", true);
+
+        if (!FileBasedPrefs.GetBool("test").Equals(true))
+        {
+            Debug.LogException(new System.Exception("SetBoolFailed"));
+            return;
+        }
+
+        FileBasedPrefs.SetBool("test", true);
+
+        if (!FileBasedPrefs.GetBool("test").Equals(true))
+        {
+            Debug.LogException(new System.Exception("ReplaceBoolFailed"));
+            return;
+        }
+
+        if (!FileBasedPrefs.HasKeyForBool("test"))
+        {
+            Debug.LogException(new System.Exception("HasKeyForBoolFailed"));
+            return;
+        }
+
+        FileBasedPrefs.DeleteBool("test");
+
+        if (!FileBasedPrefs.GetBool("test").Equals(false))
+        {
+            Debug.LogException(new System.Exception("DeleteBoolFailed"));
+            return;
+        }
+
+        Debug.Log("Bool Tests Passed");
+
+    }
+
+    void GeneralTests()
+    {
+        FileBasedPrefs.SetString("test", "test");
+
+        if (!FileBasedPrefs.HasKey("test"))
+        {
+            Debug.LogException(new System.Exception("HasKeyFailed"));
+            return;
+        }
+
+        FileBasedPrefs.DeleteKey("test");
+
+        if (FileBasedPrefs.HasKey("test"))
+        {
+            Debug.LogException(new System.Exception("DeleteKeyFailed"));
+            return;
+        }
+
+        Debug.Log("General Tests Passed");
+
     }
 
 
