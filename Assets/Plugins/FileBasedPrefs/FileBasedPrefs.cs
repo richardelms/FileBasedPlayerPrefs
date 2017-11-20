@@ -9,42 +9,42 @@ namespace STF.FileBasedPrefs
 
         #region Public Get, Set and Util methods
 
-        public static void SetString(string key, string value)
+        public static void SetString(string key, string value = default(string))
         {
             AddDataToSaveFile(key, value);
         }
 
-        public static string GetString(string key, string defaultValue)
+        public static string GetString(string key, string defaultValue = default(string))
         {
             return (string)GetDataFromSaveFile(key, defaultValue);
         }
 
-        public static void SetInt(string key, int value)
+        public static void SetInt(string key, int value = default(int))
         {
             AddDataToSaveFile(key, value);
         }
 
-        public static int GetInt(string key, int defaultValue)
+        public static int GetInt(string key, int defaultValue = default(int))
         {
             return (int)GetDataFromSaveFile(key, defaultValue);
         }
 
-        public static void SetFloat(string key, float value)
+        public static void SetFloat(string key, float value = default(float))
         {
             AddDataToSaveFile(key, value);
         }
 
-        public static float GetFloat(string key, float defaultValue)
+        public static float GetFloat(string key, float defaultValue = default(float))
         {
             return (float)GetDataFromSaveFile(key, defaultValue);
         }
 
-        public static void SetBool(string key, bool value)
+        public static void SetBool(string key, bool value = default(bool))
         {
             AddDataToSaveFile(key, value);
         }
 
-        public static bool GetBool(string key, bool defaultValue)
+        public static bool GetBool(string key, bool defaultValue = default(bool))
         {
             return (bool)GetDataFromSaveFile(key, defaultValue);
         }
@@ -53,6 +53,14 @@ namespace STF.FileBasedPrefs
         {
             return GetSaveFile().HasKey(key);
         }
+
+        public static void DeleteKey(string key)
+        {
+            var saveFile = GetSaveFile();
+            saveFile.DeleteKey(key);
+            SaveSaveFile(saveFile);
+        }
+
 
         public static void OverwriteLocalSaveFile(string data)
         {

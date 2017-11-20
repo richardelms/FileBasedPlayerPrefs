@@ -239,6 +239,42 @@ namespace STF.FileBasedPrefs
 
         }
 
+        public void DeleteKey(string key)
+        {
+            for (int i = 0; i < StringData.Length; i++)
+            {
+                if (StringData[i].Key.Equals(key))
+                {
+                    StringData[i].Key = string.Empty;
+                    StringData[i].Value = string.Empty;
+                }
+            }
+            for (int i = 0; i < IntData.Length; i++)
+            {
+                if (IntData[i].Key.Equals(key))
+                {
+                    IntData[i].Key = string.Empty;
+                    IntData[i].Value = 0;
+                }
+            }
+            for (int i = 0; i < FloatData.Length; i++)
+            {
+                if (FloatData[i].Key.Equals(key))
+                {
+                    FloatData[i].Key = string.Empty;
+                    FloatData[i].Value = 0;
+                }
+            }
+            for (int i = 0; i < BoolData.Length; i++)
+            {
+                if (BoolData[i].Key.Equals(key))
+                {
+                    BoolData[i].Key = string.Empty;
+                    BoolData[i].Value = false;
+                }
+            }
+        }
+
         public bool HasKey(string key)
         {
             for (int i = 0; i < StringData.Length; i++)
