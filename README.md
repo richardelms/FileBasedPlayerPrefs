@@ -54,9 +54,9 @@ using STF.FileBasedPrefs;
 
 ### Util Methods
 ```
-    FileBasedPrefs.HasKey(String key); this will return true if there is any data type saved under the passed key
+    FileBasedPrefs.HasKey(String key); this will return true if there is any data type saved under the key
     
-    FileBasedPrefs.DeleteKey(String key); This will delete ALL data records saved under the passed key
+    FileBasedPrefs.DeleteKey(String key); This will delete ALL data records saved under the key
 
     FileBasedPrefs.DeleteAll(); // Deletes all records and replaces the save file with a blank one
     
@@ -65,7 +65,7 @@ using STF.FileBasedPrefs;
 ```
     FileBasedPrefs.GetSaveFileAsJson(); // returns the saved prefs as a json object in string format 
     
-    FileBasedPrefs.GetSaveFilePath(); // returns the full path to your save file. tested on windows and OSX.
+    FileBasedPrefs.GetSaveFilePath(); // returns the full path to your save file.
     
-    FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like.
+    FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like. Warning, this will         break the FileBasedPrefs methods if the data you save is not in the SaveFile json format
 ```
