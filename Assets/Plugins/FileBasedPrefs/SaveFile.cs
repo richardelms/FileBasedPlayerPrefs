@@ -245,32 +245,36 @@ namespace STF.FileBasedPrefs
             {
                 if (StringData[i].Key.Equals(key))
                 {
-                    StringData[i].Key = string.Empty;
-                    StringData[i].Value = string.Empty;
+                    var dataAsList = StringData.ToList();
+                    dataAsList.RemoveAt(i);
+                    StringData = dataAsList.ToArray();
                 }
             }
             for (int i = 0; i < IntData.Length; i++)
             {
                 if (IntData[i].Key.Equals(key))
                 {
-                    IntData[i].Key = string.Empty;
-                    IntData[i].Value = 0;
+                    var dataAsList = IntData.ToList();
+                    dataAsList.RemoveAt(i);
+                    IntData = dataAsList.ToArray();
                 }
             }
             for (int i = 0; i < FloatData.Length; i++)
             {
                 if (FloatData[i].Key.Equals(key))
                 {
-                    FloatData[i].Key = string.Empty;
-                    FloatData[i].Value = 0;
+                    var dataAsList = FloatData.ToList();
+                    dataAsList.RemoveAt(i);
+                    FloatData = dataAsList.ToArray();
                 }
             }
             for (int i = 0; i < BoolData.Length; i++)
             {
                 if (BoolData[i].Key.Equals(key))
                 {
-                    BoolData[i].Key = string.Empty;
-                    BoolData[i].Value = false;
+                    var dataAsList = BoolData.ToList();
+                    dataAsList.RemoveAt(i);
+                    BoolData = dataAsList.ToArray();
                 }
             }
         }

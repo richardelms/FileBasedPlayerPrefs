@@ -61,7 +61,6 @@ namespace STF.FileBasedPrefs
             SaveSaveFile(saveFile);
         }
 
-
         public static void OverwriteLocalSaveFile(string data)
         {
             WriteToSaveFile(data);
