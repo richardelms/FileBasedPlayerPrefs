@@ -61,7 +61,15 @@ using STF.FileBasedPrefs;
     
     FileBasedPrefs.HasKeyForBool(String key); will return true if there is a bool saved under the requested key
     
-    FileBasedPrefs.DeleteKey(String key); This will delete ALL data records saved under the key
+    FileBasedPrefs.DeleteKey(String key); This will delete ALL data records saved under the key regardless of type
+    
+    FileBasedPrefs.DeleteString(String key); This will delete any string recorded under the key
+    
+    FileBasedPrefs.DeleteInt(String key); This will delete any int recorded under the key
+    
+    FileBasedPrefs.DeleteFloat(String key); This will delete any float recorded under the key
+    
+    FileBasedPrefs.DeleteBool(String key); This will delete any bool recorded under the key
 
     FileBasedPrefs.DeleteAll(); // Deletes all records and replaces the save file with a blank one
     
