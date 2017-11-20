@@ -49,14 +49,23 @@ using STF.FileBasedPrefs;
     FileBasedPrefs.SetBool("TestBool",true);
 
     FileBasedPrefs.GetBool("TestBool",false); // returns true
+    
 ```
-### File Helper Methods
+
+### Util Methods
+```
+    FileBasedPrefs.HasKey(String key); this will return true if there is any data type saved under the passed key
+    
+    FileBasedPrefs.DeleteKey(String key); This will delete ALL data records saved under the passed key
+
+    FileBasedPrefs.DeleteAll(); // Deletes all records and replaces the save file with a blank one
+    
+```
+### Save File Helper Methods
 ```
     FileBasedPrefs.GetSaveFileAsJson(); // returns the saved prefs as a json object in string format 
     
-    FileBasedPrefs.GetSaveFilePath(); // returns the full path to your save file. tested on windows and OSX
-    
-    FileBasedPrefs.DeleteAll(); // Deletes all records and replaces the save file with a blank one
+    FileBasedPrefs.GetSaveFilePath(); // returns the full path to your save file. tested on windows and OSX.
     
     FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like.
 ```
