@@ -16,8 +16,6 @@ Tested on Windows, OSX and Android.
 
 Grab the latest unity package from the releases tab of this repo and import it into your project.
 
-## Configuration
-
 #### Save File Name
 
 At the top of the script FileBasedPrefs.cs you can specify what name you would like your save file to have in the string SaveFileName.
@@ -51,7 +49,6 @@ using STF.FileBasedPrefs;
     FileBasedPrefs.GetBool("TestBool",false); // returns true
     
 ```
-
 ### Util Methods
 ```
     FileBasedPrefs.HasKey(String key); this will return true if there is any data type saved under the key
