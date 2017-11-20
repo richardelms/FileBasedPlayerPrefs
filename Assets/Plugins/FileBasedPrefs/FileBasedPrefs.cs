@@ -49,6 +49,11 @@ namespace STF.FileBasedPrefs
             return (bool)GetDataFromSaveFile(key, defaultValue);
         }
 
+        public static bool HasKey(string key)
+        {
+            return GetSaveFile().HasKey(key);
+        }
+
         public static void OverwriteLocalSaveFile(string data)
         {
             WriteToSaveFile(data);

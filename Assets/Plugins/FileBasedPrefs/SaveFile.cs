@@ -105,7 +105,7 @@ namespace STF.FileBasedPrefs
 
         public void UpdateOrAddData(string key, object value)
         {
-            if (HasKey(key, value))
+            if (HasKeyFromObject(key, value))
             {
                 SetValueForExistingKey(key, value);
             }
@@ -188,7 +188,7 @@ namespace STF.FileBasedPrefs
             }
         }
 
-        public bool HasKey(string key, object value)
+        public bool HasKeyFromObject(string key, object value)
         {
 
             if (value is string)
@@ -237,6 +237,39 @@ namespace STF.FileBasedPrefs
 
             return false;
 
+        }
+
+        public bool HasKey(string key)
+        {
+            for (int i = 0; i < StringData.Length; i++)
+            {
+                if (StringData[i].Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            for (int i = 0; i < IntData.Length; i++)
+            {
+                if (IntData[i].Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            for (int i = 0; i < FloatData.Length; i++)
+            {
+                if (FloatData[i].Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            for (int i = 0; i < BoolData.Length; i++)
+            {
+                if (BoolData[i].Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
