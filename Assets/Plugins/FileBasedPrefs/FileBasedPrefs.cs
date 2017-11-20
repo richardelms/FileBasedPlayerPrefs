@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+
 namespace STF.FileBasedPrefs
 {
     public static class FileBasedPrefs
@@ -16,7 +17,7 @@ namespace STF.FileBasedPrefs
 
         public static string GetString(string key, string defaultValue = default(string))
         {
-            return (string)GetDataFromSaveFile(key, defaultValue);
+            return (string) GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void SetInt(string key, int value = default(int))
@@ -26,7 +27,7 @@ namespace STF.FileBasedPrefs
 
         public static int GetInt(string key, int defaultValue = default(int))
         {
-            return (int)GetDataFromSaveFile(key, defaultValue);
+            return (int) GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void SetFloat(string key, float value = default(float))
@@ -36,7 +37,7 @@ namespace STF.FileBasedPrefs
 
         public static float GetFloat(string key, float defaultValue = default(float))
         {
-            return (float)GetDataFromSaveFile(key, defaultValue);
+            return (float) GetDataFromSaveFile(key, defaultValue);
         }
 
         public static void SetBool(string key, bool value = default(bool))
@@ -46,7 +47,7 @@ namespace STF.FileBasedPrefs
 
         public static bool GetBool(string key, bool defaultValue = default(bool))
         {
-            return (bool)GetDataFromSaveFile(key, defaultValue);
+            return (bool) GetDataFromSaveFile(key, defaultValue);
         }
 
         public static bool HasKey(string key)
@@ -112,7 +113,7 @@ namespace STF.FileBasedPrefs
         private static void WriteToSaveFile(string data)
         {
             var tw = new StreamWriter(GetSaveFilePath());
-            if(ScrambleSaveData)
+            if (ScrambleSaveData)
             {
                 data = JsonScrambler(data);
             }
@@ -126,7 +127,7 @@ namespace STF.FileBasedPrefs
             string res = "";
             for (int i = 0; i < data.Length; i++)
             {
-                res += (char)(data[i] ^ codeword[i % codeword.Length]);
+                res += (char) (data[i] ^ codeword[i % codeword.Length]);
             }
             return res;
         }
@@ -149,6 +150,5 @@ namespace STF.FileBasedPrefs
 
         #endregion
     }
-
 }
 

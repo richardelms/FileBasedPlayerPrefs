@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+
 namespace STF.FileBasedPrefs
 {
     [Serializable]
@@ -15,6 +16,7 @@ namespace STF.FileBasedPrefs
         {
             public string Key;
             public string Value;
+
             public StringItem(string K, string V)
             {
                 Key = K;
@@ -27,6 +29,7 @@ namespace STF.FileBasedPrefs
         {
             public string Key;
             public int Value;
+
             public IntItem(string K, int V)
             {
                 Key = K;
@@ -39,6 +42,7 @@ namespace STF.FileBasedPrefs
         {
             public string Key;
             public float Value;
+
             public FloatItem(string K, float V)
             {
                 Key = K;
@@ -51,6 +55,7 @@ namespace STF.FileBasedPrefs
         {
             public string Key;
             public bool Value;
+
             public BoolItem(string K, bool V)
             {
                 Key = K;
@@ -120,39 +125,38 @@ namespace STF.FileBasedPrefs
             if (value is string)
             {
                 var dataAsList = StringData.ToList();
-                dataAsList.Add(new StringItem(key, (string)value));
+                dataAsList.Add(new StringItem(key, (string) value));
                 StringData = dataAsList.ToArray();
             }
             if (value is int)
             {
                 var dataAsList = IntData.ToList();
-                dataAsList.Add(new IntItem(key, (int)value));
+                dataAsList.Add(new IntItem(key, (int) value));
                 IntData = dataAsList.ToArray();
             }
             if (value is float)
             {
                 var dataAsList = FloatData.ToList();
-                dataAsList.Add(new FloatItem(key, (float)value));
+                dataAsList.Add(new FloatItem(key, (float) value));
                 FloatData = dataAsList.ToArray();
             }
             if (value is bool)
             {
                 var dataAsList = BoolData.ToList();
-                dataAsList.Add(new BoolItem(key, (bool)value));
+                dataAsList.Add(new BoolItem(key, (bool) value));
                 BoolData = dataAsList.ToArray();
             }
         }
 
         private void SetValueForExistingKey(string key, object value)
         {
-
             if (value is string)
             {
                 for (int i = 0; i < StringData.Length; i++)
                 {
                     if (StringData[i].Key.Equals(key))
                     {
-                        StringData[i].Value = (string)value;
+                        StringData[i].Value = (string) value;
                     }
                 }
             }
@@ -162,7 +166,7 @@ namespace STF.FileBasedPrefs
                 {
                     if (IntData[i].Key.Equals(key))
                     {
-                        IntData[i].Value = (int)value;
+                        IntData[i].Value = (int) value;
                     }
                 }
             }
@@ -172,7 +176,7 @@ namespace STF.FileBasedPrefs
                 {
                     if (FloatData[i].Key.Equals(key))
                     {
-                        FloatData[i].Value = (float)value;
+                        FloatData[i].Value = (float) value;
                     }
                 }
             }
@@ -182,7 +186,7 @@ namespace STF.FileBasedPrefs
                 {
                     if (BoolData[i].Key.Equals(key))
                     {
-                        BoolData[i].Value = (bool)value;
+                        BoolData[i].Value = (bool) value;
                     }
                 }
             }
@@ -190,7 +194,6 @@ namespace STF.FileBasedPrefs
 
         public bool HasKeyFromObject(string key, object value)
         {
-
             if (value is string)
             {
                 for (int i = 0; i < StringData.Length; i++)
@@ -236,7 +239,6 @@ namespace STF.FileBasedPrefs
             }
 
             return false;
-
         }
 
         public void DeleteKey(string key)
@@ -311,6 +313,5 @@ namespace STF.FileBasedPrefs
             }
             return false;
         }
-
     }
 }
