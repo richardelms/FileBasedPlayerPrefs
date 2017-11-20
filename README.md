@@ -4,7 +4,7 @@ This Unity library is designed to replace the standard Unity PlayerPrefs.
 
 The main difference being that it saves all records in JSON format to a file in the Application.persistentDataPath.
 
-This makes it much easier to save your save game data in places like the Steam Cloud services, iCloud, Google Play or your own backend etc..
+This makes it much easier to store your save games data in places like the Steam Cloud services, iCloud, Google Play or your own backend etc..
 
 The Library also adds some functionality such as extra record types and more refined/flexible data access.
 
@@ -26,12 +26,8 @@ At the top of the script FileBasedPrefs.cs you can specify what name you would l
 
 I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data.
 
-## Usage
+##Usage
 
-You must include the STF.FileBasedPrefs namespace at the top of any script you use this in:
-```
-using STF.FileBasedPrefs;
-```
 ### Get and Set
 ```
     FileBasedPrefs.SetString(string key, string value);
