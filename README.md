@@ -32,26 +32,34 @@ using STF.FileBasedPrefs;
 ```
 ### Get and Set
 ```
-    FileBasedPrefs.SetString("TestString","test");
+    FileBasedPrefs.SetString(string key, string value);
 
-    FileBasedPrefs.GetString("TestString",string.Empty); // returns "test"
+    FileBasedPrefs.GetString(string key, (optional)string defaultValue);
     
-    FileBasedPrefs.SetInt("TestInt",333);
+    FileBasedPrefs.SetInt(string key, int value);
 
-    FileBasedPrefs.GetInt("TestInt",0); // returns 333
+    FileBasedPrefs.GetInt(string key, (optional)int defaultValue); 
     
-    FileBasedPrefs.SetFloat("TestFloat",123.123f);
+    FileBasedPrefs.SetFloat(string key, float value);
 
-    FileBasedPrefs.GetFloat("TestFloat",0); // returns 123.123f
+    FileBasedPrefs.GetFloat(string key, (optional)float defaultValue); 
     
-    FileBasedPrefs.SetBool("TestBool",true);
+    FileBasedPrefs.SetBool(string key, bool value);
 
-    FileBasedPrefs.GetBool("TestBool",false); // returns true
+    FileBasedPrefs.GetBool(string key, (optional)bool defaultValue);
     
 ```
 ### Util Methods
 ```
-    FileBasedPrefs.HasKey(String key); this will return true if there is any data type saved under the key
+    FileBasedPrefs.HasKey(String key); will return true if there is any data type saved under the requested key
+    
+    FileBasedPrefs.HasKeyForString(String key); will return true if there is a string saved under the requested key
+    
+    FileBasedPrefs.HasKeyForInt(String key); will return true if there is a int saved under the requested key
+    
+    FileBasedPrefs.HasKeyForFloat(String key); will return true if there is a float saved under the requested key
+    
+    FileBasedPrefs.HasKeyForBool(String key); will return true if there is a bool saved under the requested key
     
     FileBasedPrefs.DeleteKey(String key); This will delete ALL data records saved under the key
 
@@ -64,5 +72,5 @@ using STF.FileBasedPrefs;
     
     FileBasedPrefs.GetSaveFilePath(); // returns the full path to your save file.
     
-    FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like. Warning, this will         break the FileBasedPrefs methods if the data you save is not in the SaveFile json format
+    FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like. Warning,       this will break the FileBasedPrefs methods if the data you save is not in the SaveFile json format
 ```
