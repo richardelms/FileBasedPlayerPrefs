@@ -18,13 +18,13 @@ Tested on Windows, OSX and Android.
 
 Grab the latest unity package from the releases tab of this repo and import it into your project.
 
-#### Save File Name
+## Save File Encryption
+
+I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data. Adding your own better ecryption would not be super difficult if you had the time.
+
+## Save File Name
 
 At the top of the script FileBasedPrefs.cs you can specify what name you would like your save file to have in the string SaveFileName.
-
-#### Save File Encryption
-
-I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data.
 
 ## Usage
 
