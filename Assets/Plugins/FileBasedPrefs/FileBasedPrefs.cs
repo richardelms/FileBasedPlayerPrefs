@@ -113,7 +113,7 @@ public static class FileBasedPrefs
 
     public static void DeleteAll()
     {
-        WriteToSaveFile(JsonUtility.ToJson(new SaveFile()));
+        WriteToSaveFile(JsonUtility.ToJson(new FileBasedPrefsSaveFileModel()));
     }
 
     public static void OverwriteLocalSaveFile(string data)
@@ -154,7 +154,7 @@ public static class FileBasedPrefs
         var fileExists = File.Exists(GetSaveFilePath());
         if (!fileExists)
         {
-            var blankSaveFile = JsonUtility.ToJson(new SaveFile());
+            var blankSaveFile = JsonUtility.ToJson(new FileBasedPrefsSaveFileModel());
             WriteToSaveFile(blankSaveFile);
         }
     }
@@ -181,12 +181,12 @@ public static class FileBasedPrefs
         return res;
     }
 
-    private static void SaveSaveFile(SaveFile data)
+    private static void SaveSaveFile(FileBasedPrefsSaveFileModel data)
     {
         WriteToSaveFile(JsonUtility.ToJson(data));
     }
 
-    private static SaveFile GetSaveFile()
+    private static FileBasedPrefsSaveFileModel GetSaveFile()
     {
         CheckForSaveFile();
         var saveFileText = File.ReadAllText(GetSaveFilePath());
@@ -194,7 +194,7 @@ public static class FileBasedPrefs
         {
             saveFileText = JsonScrambler(saveFileText);
         }
-        return JsonUtility.FromJson<SaveFile>(saveFileText);
+        return JsonUtility.FromJson<FileBasedPrefsSaveFileModel>(saveFileText);
     }
 
     #endregion
