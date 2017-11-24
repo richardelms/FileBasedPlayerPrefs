@@ -4,17 +4,38 @@ using UnityEngine;
 
 public class Test : MonoBehaviour {
 
+    public bool SpeedTest;
+
 	void Start ()
 	{
+
+
         FileBasedPrefs.DeleteAll();
+
+        if (SpeedTest)
+        {
+            FileBasedPrefs.SetString("SpeedTest", "SpeedTest");
+            return;
+        }
+
         Invoke("StringTests", 0.25f);
         Invoke("IntTests", 0.5f);
         Invoke("FloatTests", 0.75f);
         Invoke("BoolTests", 1f);
         Invoke("GeneralTests", 1.25f);
+
     }
 
-
+    private void Update()
+    {
+        if (SpeedTest)
+        {
+            var test = FileBasedPrefs.GetString("SpeedTest");
+            var test2 = FileBasedPrefs.GetString("SpeedTest");
+            var test3 = FileBasedPrefs.GetString("SpeedTest");
+            var test4 = FileBasedPrefs.GetString("SpeedTest");
+        }
+    }
 
 
     void StringTests()
