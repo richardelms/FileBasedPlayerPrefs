@@ -5,8 +5,8 @@ using UnityEngine;
 public static class FileBasedPrefs
 {
     private const string SaveFileName = "saveData.txt";
-    private const bool ScrambleSaveData = true;
-    private const bool AutoSaveData = true;
+    private const bool ScrambleSaveData = false;
+    private const bool AutoSaveData = false;
     private static FileBasedPrefsSaveFileModel _latestData;
 
     const string String_Empty = "";
@@ -52,6 +52,8 @@ public static class FileBasedPrefs
     {
         return (bool) GetDataFromSaveFile(key, defaultValue);
     }
+
+    #endregion 
 
     public static bool HasKey(string key)
     {
@@ -134,7 +136,7 @@ public static class FileBasedPrefs
         return File.ReadAllText(GetSaveFilePath());
     }
 
-    #endregion
+
 
     #region File Utils
 

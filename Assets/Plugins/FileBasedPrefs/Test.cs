@@ -39,6 +39,10 @@ public class Test : MonoBehaviour {
                 FileBasedPrefs.SetString("SpeedTest" + i, "SpeedTest" + i);
             }
         }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            FileBasedPrefs.ManualySave();
+        }
     }
 
 
@@ -74,9 +78,9 @@ public class Test : MonoBehaviour {
             return;
         }
 
-        FileBasedPrefs.SetString("test", "test2");
+        FileBasedPrefs.SetString("test", "test33");
 
-        if (!FileBasedPrefs.GetString("test").Equals("test2"))
+        if (!FileBasedPrefs.GetString("test").Equals("test33"))
         {
             Debug.LogException(new System.Exception("ReplaceStringFailed"));
             return;
@@ -118,9 +122,9 @@ public class Test : MonoBehaviour {
             return;
         }
 
-        FileBasedPrefs.SetInt("test", 2);
+        FileBasedPrefs.SetInt("test", 333);
 
-        if (!FileBasedPrefs.GetInt("test").Equals(2))
+        if (!FileBasedPrefs.GetInt("test").Equals(333))
         {
             Debug.LogException(new System.Exception("ReplaceIntFailed"));
             return;
@@ -162,9 +166,9 @@ public class Test : MonoBehaviour {
             return;
         }
 
-        FileBasedPrefs.SetFloat("test", 2);
+        FileBasedPrefs.SetFloat("test", 333.333f);
 
-        if (!FileBasedPrefs.GetFloat("test").Equals(2))
+        if (!FileBasedPrefs.GetFloat("test").Equals(333.333f))
         {
             Debug.LogException(new System.Exception("ReplaceFloatFailed"));
             return;
