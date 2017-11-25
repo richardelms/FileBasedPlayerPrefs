@@ -5,13 +5,13 @@ using UnityEngine;
 public static class FileBasedPrefs
 {
     private const string SaveFileName = "saveData.txt";
-    private const bool ScrambleSaveData = false;
-    private const bool AutoSaveData = false;
+    private const bool ScrambleSaveData = true;
+    private const bool AutoSaveData = true;
     private static FileBasedPrefsSaveFileModel _latestData;
 
     const string String_Empty = "";
 
-    #region Public Get, Set and Util methods
+    #region Public Get, Set and util
 
     public static void SetString(string key, string value = String_Empty)
     {
@@ -53,8 +53,6 @@ public static class FileBasedPrefs
         return (bool) GetDataFromSaveFile(key, defaultValue);
     }
 
-    #endregion 
-
     public static bool HasKey(string key)
     {
         return GetSaveFile().HasKey(key);
@@ -82,37 +80,32 @@ public static class FileBasedPrefs
 
     public static void DeleteKey(string key)
     {
-        var saveFile = GetSaveFile();
-        saveFile.DeleteKey(key);
-        SaveSaveFile(saveFile);
+        GetSaveFile().DeleteKey(key);
+        SaveSaveFile();
     }
 
     public static void DeleteString(string key)
     {
-        var saveFile = GetSaveFile();
-        saveFile.DeleteString(key);
-        SaveSaveFile(saveFile);
+        GetSaveFile().DeleteString(key);
+        SaveSaveFile();
     }
 
     public static void DeleteInt(string key)
     {
-        var saveFile = GetSaveFile();
-        saveFile.DeleteInt(key);
-        SaveSaveFile(saveFile);
+        GetSaveFile().DeleteInt(key);
+        SaveSaveFile();
     }
 
     public static void DeleteFloat(string key)
     {
-        var saveFile = GetSaveFile();
-        saveFile.DeleteFloat(key);
-        SaveSaveFile(saveFile);
+        GetSaveFile().DeleteFloat(key);
+        SaveSaveFile();
     }
 
     public static void DeleteBool(string key)
     {
-        var saveFile = GetSaveFile();
-        saveFile.DeleteBool(key);
-        SaveSaveFile(saveFile);
+        GetSaveFile().DeleteBool(key);
+        SaveSaveFile();
     }
 
     public static void DeleteAll()
@@ -125,6 +118,28 @@ public static class FileBasedPrefs
         WriteToSaveFile(data);
     }
 
+
+    #endregion
+
+
+
+    #region Read data
+
+    private static FileBasedPrefsSaveFileModel GetSaveFile()
+    {
+        CheckSaveFileExists();
+        if (_latestData == null)
+        {
+            var saveFileText = File.ReadAllText(GetSaveFilePath());
+            if (ScrambleSaveData)
+            {
+                saveFileText = DataScrambler(saveFileText);
+            }
+            _latestData = JsonUtility.FromJson<FileBasedPrefsSaveFileModel>(saveFileText);
+        }
+        return _latestData;
+    }
+
     public static string GetSaveFilePath()
     {
         return Path.Combine(Application.persistentDataPath, SaveFileName);
@@ -132,19 +147,8 @@ public static class FileBasedPrefs
 
     public static string GetSaveFileAsJson()
     {
-        CheckForSaveFile();
+        CheckSaveFileExists();
         return File.ReadAllText(GetSaveFilePath());
-    }
-
-
-
-    #region File Utils
-
-    private static void AddDataToSaveFile(string key, object value)
-    {
-        var saveFile = GetSaveFile();
-        saveFile.UpdateOrAddData(key, value);
-        SaveSaveFile(saveFile);
     }
 
     private static object GetDataFromSaveFile(string key, object defaultValue)
@@ -153,30 +157,28 @@ public static class FileBasedPrefs
         return saveFile.GetValueFromKey(key, defaultValue);
     }
 
-    private static void CheckForSaveFile()
-    {
-        var fileExists = File.Exists(GetSaveFilePath());
-        if (!fileExists)
-        {
-            var blankSaveFile = JsonUtility.ToJson(new FileBasedPrefsSaveFileModel());
-            WriteToSaveFile(blankSaveFile);
-        }
-    }
+    #endregion
 
+
+    #region write data
+
+    private static void AddDataToSaveFile(string key, object value)
+    {
+        GetSaveFile().UpdateOrAddData(key, value);
+        SaveSaveFile();
+    }
     public static void ManualySave()
     {
-        SaveSaveFile(_latestData,true);
+        SaveSaveFile(true);
     }
 
-    private static void SaveSaveFile(FileBasedPrefsSaveFileModel data, bool manualSave = false)
+    private static void SaveSaveFile(bool manualSave = false)
     {
-        _latestData = data;
         if (AutoSaveData || manualSave)
         {
-            WriteToSaveFile(JsonUtility.ToJson(data));
+            WriteToSaveFile(JsonUtility.ToJson(GetSaveFile()));
         }
     }
-
     private static void WriteToSaveFile(string data)
     {
         var tw = new StreamWriter(GetSaveFilePath());
@@ -188,24 +190,32 @@ public static class FileBasedPrefs
         tw.Close();
     }
 
-    private static FileBasedPrefsSaveFileModel GetSaveFile()
-    {        
-        if (_latestData == null)
+    #endregion
+
+
+    #region File Utils
+
+    private static void CheckSaveFileExists()
+    {
+        if (!DoesSaveFileExist())
         {
-            CheckForSaveFile();
-            var saveFileText = File.ReadAllText(GetSaveFilePath());
-            if (ScrambleSaveData)
-            {
-                saveFileText = DataScrambler(saveFileText);
-            }
-            _latestData = JsonUtility.FromJson<FileBasedPrefsSaveFileModel>(saveFileText);
+            CreateNewSaveFile();
         }
-        return _latestData;
+    }
+
+    private static bool DoesSaveFileExist()
+    {
+        return File.Exists(GetSaveFilePath());
+    }
+
+    private static void CreateNewSaveFile()
+    {
+        WriteToSaveFile(JsonUtility.ToJson(new FileBasedPrefsSaveFileModel()));
     }
 
     static string DataScrambler(string data)
     { 
-        string codeword = "randomword";
+        string codeword = "fjnskabasflbdcj";
         string res = ""; 
         for (int i = 0; i<data.Length; i++) 
         { 
