@@ -5,16 +5,20 @@ using UnityEngine;
 public class Test : MonoBehaviour {
 
     public bool SpeedTest;
-
+    public bool DeleteAtStart;
 	void Start ()
 	{
 
-
-        FileBasedPrefs.DeleteAll();
-
+        if (DeleteAtStart)
+        {
+            FileBasedPrefs.DeleteAll();
+        }
         if (SpeedTest)
         {
-            FileBasedPrefs.SetString("SpeedTest", "SpeedTest");
+            for (int i = 0; i < 10; i ++)
+            {
+                FileBasedPrefs.SetString("SpeedTest" + i, "SpeedTest" + i);
+            }
             return;
         }
 
@@ -30,10 +34,10 @@ public class Test : MonoBehaviour {
     {
         if (SpeedTest)
         {
-            var test = FileBasedPrefs.GetString("SpeedTest");
-            var test2 = FileBasedPrefs.GetString("SpeedTest");
-            var test3 = FileBasedPrefs.GetString("SpeedTest");
-            var test4 = FileBasedPrefs.GetString("SpeedTest");
+            for (int i = 0; i < 10; i++)
+            {
+                FileBasedPrefs.SetString("SpeedTest" + i, "SpeedTest" + i);
+            }
         }
     }
 
@@ -67,6 +71,14 @@ public class Test : MonoBehaviour {
         if (!FileBasedPrefs.GetString("test").Equals(""))
         {
             Debug.LogException(new System.Exception("DeleteStringFailed"));
+            return;
+        }
+
+        FileBasedPrefs.SetString("test", "test2");
+
+        if (!FileBasedPrefs.GetString("test").Equals("test2"))
+        {
+            Debug.LogException(new System.Exception("ReplaceStringFailed"));
             return;
         }
 
@@ -106,6 +118,14 @@ public class Test : MonoBehaviour {
             return;
         }
 
+        FileBasedPrefs.SetInt("test", 2);
+
+        if (!FileBasedPrefs.GetInt("test").Equals(2))
+        {
+            Debug.LogException(new System.Exception("ReplaceIntFailed"));
+            return;
+        }
+
         Debug.Log("Int Tests Passed");
 
     }
@@ -139,6 +159,14 @@ public class Test : MonoBehaviour {
         if (!FileBasedPrefs.GetFloat("test").Equals(0))
         {
             Debug.LogException(new System.Exception("DeleteFloatFailed"));
+            return;
+        }
+
+        FileBasedPrefs.SetFloat("test", 2);
+
+        if (!FileBasedPrefs.GetFloat("test").Equals(2))
+        {
+            Debug.LogException(new System.Exception("ReplaceFloatFailed"));
             return;
         }
 
@@ -178,6 +206,14 @@ public class Test : MonoBehaviour {
             return;
         }
 
+        FileBasedPrefs.SetBool("test", true);
+
+        if (!FileBasedPrefs.GetBool("test").Equals(true))
+        {
+            Debug.LogException(new System.Exception("ReplaceBoolFailed"));
+            return;
+        }
+
         Debug.Log("Bool Tests Passed");
 
     }
@@ -192,13 +228,13 @@ public class Test : MonoBehaviour {
             return;
         }
 
-        FileBasedPrefs.DeleteKey("test");
+        //FileBasedPrefs.DeleteKey("test");
 
-        if (FileBasedPrefs.HasKey("test"))
-        {
-            Debug.LogException(new System.Exception("DeleteKeyFailed"));
-            return;
-        }
+        //if (FileBasedPrefs.HasKey("test"))
+        //{
+        //    Debug.LogException(new System.Exception("DeleteKeyFailed"));
+        //    return;
+        //}
 
         Debug.Log("General Tests Passed");
 
