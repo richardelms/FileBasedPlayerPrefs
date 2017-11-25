@@ -112,6 +112,7 @@ public static class FileBasedPrefs
     public static void DeleteAll()
     {
         WriteToSaveFile(JsonUtility.ToJson(new FileBasedPrefsSaveFileModel()));
+        _latestData = new FileBasedPrefsSaveFileModel();
     }
 
     public static void OverwriteLocalSaveFile(string data)
@@ -144,7 +145,6 @@ public static class FileBasedPrefs
             {
                 Debug.LogException(new Exception("SAVE FILE IN WRONG FORMAT, CREATING NEW SAVE FILE : " + e.Message));
                 DeleteAll();
-                _latestData = new FileBasedPrefsSaveFileModel();
             }
 
         }
