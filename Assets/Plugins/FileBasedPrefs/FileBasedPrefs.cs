@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+using System;
 
 
 public static class FileBasedPrefs
@@ -135,7 +136,17 @@ public static class FileBasedPrefs
             {
                 saveFileText = DataScrambler(saveFileText);
             }
-            _latestData = JsonUtility.FromJson<FileBasedPrefsSaveFileModel>(saveFileText);
+            try
+            {
+                _latestData = JsonUtility.FromJson<FileBasedPrefsSaveFileModel>(saveFileText);
+            }
+            catch(ArgumentException e)
+            {
+                Debug.LogException(new Exception("SAVE FILE IN WRONG FORMAT, CREATING NEW SAVE FILE : " + e.Message));
+                DeleteAll();
+                _latestData = new FileBasedPrefsSaveFileModel();
+            }
+
         }
         return _latestData;
     }
