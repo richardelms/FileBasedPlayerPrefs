@@ -153,8 +153,7 @@ public static class FileBasedPrefs
 
     private static object GetDataFromSaveFile(string key, object defaultValue)
     {
-        var saveFile = GetSaveFile();
-        return saveFile.GetValueFromKey(key, defaultValue);
+        return GetSaveFile().GetValueFromKey(key, defaultValue);
     }
 
     #endregion
