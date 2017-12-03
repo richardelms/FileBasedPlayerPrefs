@@ -18,7 +18,7 @@ Grab the latest unity package from the releases tab of this repo and import it i
 
 ## Save File Encryption
 
-I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data. Adding your own better ecryption would not be super difficult if you had the time.
+I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data. Adding your own better encryption would not be super difficult if you had the time.
 
 ## Save File Name
 
@@ -72,9 +72,33 @@ At the top of the script FileBasedPrefs.cs you can specify what name you would l
 ```
 ### Save File Helper Methods
 ```
-    FileBasedPrefs.GetSaveFileAsJson(); // returns the saved prefs as a json object in string format 
+    FileBasedPrefs.ManualySave(); // see the Advanced Usage section for important details regarding optimisation. 
+
+    FileBasedPrefs.GetSaveFileAsJson(); // returns the saved prefs as a json object in string format.
     
     FileBasedPrefs.GetSaveFilePath(); // returns the full path to your save file.
     
-    FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like. Warning,       this will break the FileBasedPrefs methods if the data you save is not in the SaveFile json format
+    FileBasedPrefs.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like. Warning,       this will break the FileBasedPrefs methods if the data you save is not in the SaveFile json format.
 ```
+
+## Advanced Usage / Speed optimisation / Manual File writing
+
+Unfortunately encrypting a text file is pretty slow, no matter how you do it, so if you are using one of the Set methods during active gameplay, then you might notice some slowdown in fps.
+
+To counteract this i have included some advanced features that give you more control of when and how the library saves/encrypts data.
+
+At the top of FileBasedPrefs.cs is a bool named "AutoSaveData";
+
+If set to true (the default setting), then every time a Set method is called, it will write and encrypt the save data immediately.
+
+If set to false, then it will only save and encrypt the data to file when you call FileBasedPrefs.ManualySave();
+
+This means that the save data is stored in memory until you specifically tell it to write the file. This is much faster and causes no performance issues. 
+
+Included in the plugin package is a script named "FileBasedPrefsQuitListener".
+
+If you attach that script to a gameobject in your splash or main menu scene, then it will call ManualySave() whenever the game quits, pauses or goes in or out of focus.
+
+This means that the data is written and encrypted at a time when a slight hit in fps will not be noticeable to the user.
+
+
