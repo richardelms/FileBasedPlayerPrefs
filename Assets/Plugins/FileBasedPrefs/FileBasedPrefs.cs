@@ -118,6 +118,7 @@ public static class FileBasedPrefs
     public static void OverwriteLocalSaveFile(string data)
     {
         WriteToSaveFile(data);
+        _latestData = null;
     }
 
 
@@ -146,7 +147,6 @@ public static class FileBasedPrefs
                 Debug.LogException(new Exception("SAVE FILE IN WRONG FORMAT, CREATING NEW SAVE FILE : " + e.Message));
                 DeleteAll();
             }
-
         }
         return _latestData;
     }
@@ -225,7 +225,7 @@ public static class FileBasedPrefs
 
     static string DataScrambler(string data)
     { 
-        string codeword = "fjnskabasflbdcj";
+        string codeword = "enteryourowncodeifyoulike";
         string res = ""; 
         for (int i = 0; i<data.Length; i++) 
         { 

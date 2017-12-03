@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
 
-public class FileBasedPrefsQuitListner : MonoBehaviour {
+public class FileBasedPrefsQuitListener : MonoBehaviour {
+
+    public static FileBasedPrefsQuitListener Instance;
 
     private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
