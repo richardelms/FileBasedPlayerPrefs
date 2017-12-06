@@ -7,6 +7,7 @@ public static class FileBasedPrefs
 {
     private const string SaveFileName = "saveData.txt";
     private const bool ScrambleSaveData = true;
+    private const string EncryptionCodeword = "CHANGE ME TO YOUR OWN RANDOM STRING";
     private const bool AutoSaveData = true;
     private static FileBasedPrefsSaveFileModel _latestData;
 
@@ -225,11 +226,10 @@ public static class FileBasedPrefs
 
     static string DataScrambler(string data)
     { 
-        string codeword = "enteryourowncodeifyoulike";
         string res = ""; 
         for (int i = 0; i<data.Length; i++) 
         { 
-            res += (char) (data[i] ^ codeword[i % codeword.Length]); 
+            res += (char) (data[i] ^ EncryptionCodeword[i % EncryptionCodeword.Length]); 
         } 
         return res; 
     } 
