@@ -87,7 +87,7 @@ At the top of the script FileBasedPrefs.cs you can specify what name you would l
 
 ## Advanced Usage / Speed optimisation / Manual File writing
 
-Unfortunately encrypting a text file is pretty slow, no matter how you do it, so if you are using one of the Set methods during active gameplay, then you might notice some slowdown in fps.
+Unfortunately, encrypting a text file is pretty slow, no matter how you do it, so if you are using one of the Set methods during active gameplay, then you might notice some slowdown in fps.
 
 To counteract this i have included some advanced features that give you more control of when and how the library saves/encrypts data.
 
