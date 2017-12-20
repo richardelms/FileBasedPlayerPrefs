@@ -20,7 +20,7 @@ Grab the latest unity package from the releases tab of this repo and import it i
 
 I have added a very simple scrambler to the saved json so that players cannot easily cheat by changing the values in the saved game file, this can be enabled or disabled with the bool ScrambleSaveData at the top of FileBasedPrefs.cs. Please note, this is not super secure encription, just a small string scrambler method that i think will stop 99.99% of users from editing the data. Adding your own better encryption would not be super difficult if you had the time.
 
-At the top of the file FileBasedPrefs.cs is a string names "EncryptionCodeword". Please change that string to your own randomised value.
+At the top of the file FileBasedPrefs.cs is a string named "EncryptionCodeword". Please change that string to your own randomised value.
 
 Once you choose a value, you must stick with it or it will break all old save files that were created with the old value.
 
