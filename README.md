@@ -22,7 +22,7 @@ I have added a very simple scrambler to the saved json so that players cannot ea
 
 At the top of the file FileBasedPrefs.cs is a string named "EncryptionCodeword". Please change that string to your own randomised value.
 
-Once you choose a value, you must stick with it or it will break all old save files that were created with the old value.
+Once you choose a value and release a version of your software with it, you must stick with it or it will break all old save files that were created with the old value.
 
 ## Save File Name
 
