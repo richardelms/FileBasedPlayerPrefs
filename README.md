@@ -10,7 +10,7 @@ The Library also adds some functionality such as extra record types and more ref
 
 Keys are type specific, meaning that if you save a string under the key "key1" it will not be overridden when you save an int with the same key "key1";
 
-Tested on Windows, OSX and Android.
+Tested on Windows, OSX, Linux, iOS and Android.
 
 ## Installation
 
