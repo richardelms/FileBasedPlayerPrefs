@@ -1,4 +1,4 @@
-# JSON File Based PlayerPrefs
+# File Based PlayerPrefs
 
 This Unity library is designed to replace the standard Unity PlayerPrefs. 
 
