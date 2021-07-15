@@ -1,4 +1,5 @@
-﻿using System.IO;
+using System.Text;
+using System.IO;
 using UnityEngine;
 using System;
 
@@ -10,9 +11,10 @@ public static class FileBasedPrefs
     private const string EncryptionCodeword = "CHANGE ME TO YOUR OWN RANDOM STRING";
     private const bool AutoSaveData = true;
     private static FileBasedPrefsSaveFileModel _latestData;
-
+    private static StringBuilder sb = new StringBuilder();
+    
     const string String_Empty = "";
-
+    
     #region Public Get, Set and util
 
     public static void SetString(string key, string value = String_Empty)
@@ -223,15 +225,16 @@ public static class FileBasedPrefs
     {
         WriteToSaveFile(JsonUtility.ToJson(new FileBasedPrefsSaveFileModel()));
     }
-
+    
     static string DataScrambler(string data)
     { 
-        string res = ""; 
+        sb.Clear();
+        
         for (int i = 0; i<data.Length; i++) 
         { 
-            res += (char) (data[i] ^ EncryptionCodeword[i % EncryptionCodeword.Length]); 
+            sb.Append((char) (data[i] ^ EncryptionCodeword[i % EncryptionCodeword.Length])); 
         } 
-        return res; 
+        return res.ToString(); 
     } 
 
     #endregion
