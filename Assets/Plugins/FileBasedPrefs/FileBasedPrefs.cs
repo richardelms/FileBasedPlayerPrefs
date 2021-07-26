@@ -234,7 +234,7 @@ public static class FileBasedPrefs
         { 
             sb.Append((char) (data[i] ^ EncryptionCodeword[i % EncryptionCodeword.Length])); 
         } 
-        return res.ToString(); 
+        return sb.ToString(); 
     } 
 
     #endregion
