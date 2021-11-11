@@ -1,0 +1,15 @@
+{
+  "name": "com.richtools.filebasedplayerprefs",
+  "version": "2.0.0",
+  "displayName": "File Based Player Prefs",
+  "description": "blahh",
+  "unity": "2017.1",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "author": {
+    "name": "richTools",
+    "email": "richardelms@gmail.com",
+    "url": "https://github.com/richardelms"
+  }
+}

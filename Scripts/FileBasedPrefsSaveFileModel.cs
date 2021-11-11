@@ -62,7 +62,7 @@ public class FileBasedPrefsSaveFileModel
         }
     }
 
-    public object GetValueFromKey(string key, object defaultValue)
+    public object GetValueForKey(string key, object defaultValue)
     {
         if (defaultValue is string)
         {
