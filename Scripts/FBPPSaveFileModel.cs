@@ -3,7 +3,7 @@ using System.Linq;
 
 
 [Serializable]
-public class FileBasedPrefsSaveFileModel
+internal class FBPPFileModel
 {
     public StringItem[] StringData = new StringItem[0];
     public IntItem[] IntData = new IntItem[0];

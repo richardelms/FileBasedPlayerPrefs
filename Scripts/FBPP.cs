@@ -4,17 +4,17 @@ using UnityEngine;
 using System;
 
 
-public static class FileBasedPrefs
+public static class FBPP
 {
     private const string SaveFileName = "saveData.txt";
     private const bool ScrambleSaveData = true;
     private const string EncryptionCodeword = "CHANGE ME TO YOUR OWN RANDOM STRING";
     private const bool AutoSaveData = true;
-    private static FileBasedPrefsSaveFileModel _latestData;
+    private static FBPPFileModel _latestData;
     private static StringBuilder sb = new StringBuilder();
-    
+
     const string String_Empty = "";
-    
+
     #region Public Get, Set and util
 
     public static void SetString(string key, string value = String_Empty)
@@ -24,7 +24,7 @@ public static class FileBasedPrefs
 
     public static string GetString(string key, string defaultValue = String_Empty)
     {
-        return (string) GetDataFromSaveFile(key, defaultValue);
+        return (string)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static void SetInt(string key, int value = default(int))
@@ -34,7 +34,7 @@ public static class FileBasedPrefs
 
     public static int GetInt(string key, int defaultValue = default(int))
     {
-        return (int) GetDataFromSaveFile(key, defaultValue);
+        return (int)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static void SetFloat(string key, float value = default(float))
@@ -44,7 +44,7 @@ public static class FileBasedPrefs
 
     public static float GetFloat(string key, float defaultValue = default(float))
     {
-        return (float) GetDataFromSaveFile(key, defaultValue);
+        return (float)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static void SetBool(string key, bool value = default(bool))
@@ -54,7 +54,7 @@ public static class FileBasedPrefs
 
     public static bool GetBool(string key, bool defaultValue = default(bool))
     {
-        return (bool) GetDataFromSaveFile(key, defaultValue);
+        return (bool)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static bool HasKey(string key)
@@ -114,8 +114,8 @@ public static class FileBasedPrefs
 
     public static void DeleteAll()
     {
-        WriteToSaveFile(JsonUtility.ToJson(new FileBasedPrefsSaveFileModel()));
-        _latestData = new FileBasedPrefsSaveFileModel();
+        WriteToSaveFile(JsonUtility.ToJson(new FBPPFileModel()));
+        _latestData = new FBPPFileModel();
     }
 
     public static void OverwriteLocalSaveFile(string data)
@@ -131,7 +131,7 @@ public static class FileBasedPrefs
 
     #region Read data
 
-    private static FileBasedPrefsSaveFileModel GetSaveFile()
+    private static FBPPFileModel GetSaveFile()
     {
         CheckSaveFileExists();
         if (_latestData == null)
@@ -143,9 +143,9 @@ public static class FileBasedPrefs
             }
             try
             {
-                _latestData = JsonUtility.FromJson<FileBasedPrefsSaveFileModel>(saveFileText);
+                _latestData = JsonUtility.FromJson<FBPPFileModel>(saveFileText);
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 Debug.LogException(new Exception("SAVE FILE IN WRONG FORMAT, CREATING NEW SAVE FILE : " + e.Message));
                 DeleteAll();
@@ -223,19 +223,19 @@ public static class FileBasedPrefs
 
     private static void CreateNewSaveFile()
     {
-        WriteToSaveFile(JsonUtility.ToJson(new FileBasedPrefsSaveFileModel()));
+        WriteToSaveFile(JsonUtility.ToJson(new FBPPFileModel()));
     }
-    
+
     static string DataScrambler(string data)
-    { 
+    {
         sb.Clear();
-        
-        for (int i = 0; i<data.Length; i++) 
-        { 
-            sb.Append((char) (data[i] ^ EncryptionCodeword[i % EncryptionCodeword.Length])); 
-        } 
-        return sb.ToString(); 
-    } 
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            sb.Append((char)(data[i] ^ EncryptionCodeword[i % EncryptionCodeword.Length]));
+        }
+        return sb.ToString();
+    }
 
     #endregion
 }
