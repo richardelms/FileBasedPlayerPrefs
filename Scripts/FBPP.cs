@@ -13,7 +13,7 @@ public static class FBPP
         { }
     }
 
-    private const string DEFAULT_INIT_MESSAGE = "FBPP used without first supplying any custom options. If this was intentional you can ignroe this message.";
+    private const string DEFAULT_INIT_MESSAGE = "FBPP started with default settings. If this was intentional you can ignroe this message. Otherwise make sure ot call FBPP.Start(config) before making any other FBPP calls.";
     
     private static FBPPConfig _config;
 
