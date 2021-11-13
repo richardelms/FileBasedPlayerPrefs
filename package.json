@@ -2,11 +2,9 @@
   "name": "com.richtools.filebasedplayerprefs",
   "version": "2.0.0",
   "displayName": "File Based Player Prefs",
-  "description": "blahh",
+  "description": "PlayerPrefs substitute that saves player prefs data in a json file.",
   "unity": "2017.1",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
+  "documentationUrl": "https://github.com/richardelms/FileBasedPlayerPrefs/blob/master/README.md",
   "author": {
     "name": "richTools",
     "email": "richardelms@gmail.com",
