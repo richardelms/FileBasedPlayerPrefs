@@ -13,8 +13,10 @@ public static class FBPP
         { }
     }
 
-    private const string DEFAULT_INIT_MESSAGE = "FBPP started with default settings. If this was intentional you can ignroe this message. Otherwise make sure ot call FBPP.Start(config) before making any other FBPP calls.";
-    
+    private const string DEFAULT_INIT_MESSAGE = "FBPP started with default settings. If this was intentional you can ignore this message. Otherwise make sure ot call FBPP.Start(config) before making any other FBPP calls.";
+
+    private const string BACKUP_PREFIX = "FBPP-Backup-";
+
     private static FBPPConfig _config;
 
     private static FBPPFileModel _latestData;
@@ -197,6 +199,12 @@ public static class FBPP
         return Path.Combine(_config.GetSaveFilePath(), _config.SaveFileName);
     }
 
+    public static string GetBackupFilePath()
+    {
+        CheckForInit();
+        return Path.Combine(_config.GetSaveFilePath(), BACKUP_PREFIX + _config.SaveFileName);
+    }
+
     public static string GetSaveFileAsJson()
     {
         CheckForInit();
@@ -220,10 +228,16 @@ public static class FBPP
         GetSaveFile().UpdateOrAddData(key, value);
         SaveSaveFile();
     }
+
     public static void ManualySave()
     {
         CheckForInit();
         SaveSaveFile(true);
+    }
+
+    public static void MakeBackup()
+    {
+        WriteToSaveFile(JsonUtility.ToJson(GetSaveFile()), true);
     }
 
     private static void SaveSaveFile(bool manualSave = false)
@@ -233,9 +247,9 @@ public static class FBPP
             WriteToSaveFile(JsonUtility.ToJson(GetSaveFile()));
         }
     }
-    private static void WriteToSaveFile(string data)
+    private static void WriteToSaveFile(string data, bool backup = false)
     {
-        var tw = new StreamWriter(GetSaveFilePath());
+        var tw = new StreamWriter(backup ? GetBackupFilePath() : GetSaveFilePath());
         if (_config.ScrambleSaveData)
         {
             data = DataScrambler(data);
