@@ -209,7 +209,7 @@ public static class FBPP
     {
         CheckForInit();
         CheckSaveFileExists();
-        return File.ReadAllText(GetSaveFilePath());
+        return JsonUtility.ToJson(GetSaveFile());
     }
 
     private static object GetDataFromSaveFile(string key, object defaultValue)
