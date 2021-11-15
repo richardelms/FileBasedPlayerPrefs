@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FBPPConfig 
 {
@@ -16,6 +17,8 @@ public class FBPPConfig
     public string EncryptionSecret = DEFAULT_ENCRYPTION_SECRET;
 
     public string SaveFilePath = null;
+
+    public UnityEvent OnLoadError = new UnityEvent();
 
     internal string GetSaveFilePath()
     {

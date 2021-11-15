@@ -54,7 +54,7 @@ var config = new FBPPConfig()
 // pass them to FBPP
 FBPP.Start(config);
 ```
-
+#### !Please see the advanced usage section for more info regarding these config values! 
 
 ## Save File Encryption
 
@@ -62,7 +62,7 @@ I have added a very simple scrambler to the saved json so that players cannot ea
 
 If you choose a custom value for the Encryption secret and release a version of your software with it, you must stick with it or it will break all old save files that were created with the old value.
 
-## Usage
+## API
 
 ### Get and Set
 ```
@@ -108,18 +108,10 @@ If you choose a custom value for the Encryption secret and release a version of 
     FBPP.DeleteAll(); // Deletes all records and replaces the save file with a blank one
     
 ```
-### Save File Helper Methods
-```
-    FBPP.ManualySave(); // see the Advanced Usage section for important details regarding optimisation. 
 
-    FBPP.GetSaveFileAsJson(); // returns the saved prefs as a json object in string format.
-    
-    FBPP.GetSaveFilePath(); // returns the full path to your save file.
-    
-    FBPP.OverwriteLocalSaveFile(string data); // overwrites the save file with whatever data you like. Warning,       this will break the FBPP methods if the data you save is not in the SaveFile json format.
-```
+## Advanced Usage 
 
-## Advanced Usage / Speed optimisation / Manual File writing
+### Optimisation 
 
 Unfortunately, encrypting a text file is pretty slow, no matter how you do it, so if you are using one of the Set methods during active gameplay, you might notice some slowdown in fps.
 
@@ -130,3 +122,54 @@ If the config value AutoSaveData is set to true (the default setting), then ever
 If set to false, then it will only save and encrypt the data to file when you call FBPP();
 
 This means that the save data is stored in memory until you specifically tell it to write the file. This means you can choose a better time to save all the data and not take any noticeable performance hits.
+
+```
+FBPP.ManualySave();
+
+```
+
+### Error handling and data backups
+
+If there is ever a situation where FBPP cannot load an existing save file (due to corruption), then by default, it will automatically create a new one. This is not ideal as your player will lose all their progress.
+
+When this happens, FBPP will trigger an event that you can listen to, so that you can restore your backup file.
+
+#### Creating a backup using FBPP.GetSaveFileAsJson();
+
+By using FBPP.GetSaveFileAsJson(), you could make a physical backup of the save file data from time to time.
+
+```
+FBPP.GetSaveFileAsJson(); // returns the saved data as a json object in string format.
+```
+
+#### Restoring a backup
+
+You should setup your error handling code when calling start like so:
+
+```
+
+// enter your custom settings
+var config = new FBPPConfig()
+{
+    SaveFileName = "my-save-file.txt",
+    AutoSaveData = false,
+    ScrambleSaveData = false,
+    EncryptionSecret = "my-secret",
+    SaveFilePath = "my/explicit/savefile/path"
+};
+
+//Listen to the OnLoadErrorEvent
+config.OnLoadError.AddListener(()=>
+{
+    // Grab your backup from where ever you saved it
+    string myBackupJson = GetMyBackupJson();
+
+    // Restore that backup
+    FBPP.OverwriteLocalSaveFile(myBackupJson);
+});
+
+// Pass the config to FBPP
+FBPP.Start(config);
+```
+
+

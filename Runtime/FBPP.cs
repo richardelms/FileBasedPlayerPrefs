@@ -2,7 +2,7 @@ using System.Text;
 using System.IO;
 using UnityEngine;
 using System;
-
+using UnityEngine.Events;
 
 public static class FBPP
 {
@@ -13,11 +13,11 @@ public static class FBPP
         { }
     }
 
-    private const string DEFAULT_INIT_MESSAGE = "FBPP started with default settings. If this was intentional you can ignore this message. Otherwise make sure ot call FBPP.Start(config) before making any other FBPP calls.";
-
-    private const string BACKUP_PREFIX = "FBPP-Backup-";
+    private const string DEFAULT_INIT_MESSAGE = "FBPP started with default settings. If this was intentional you can ignore this message. Otherwise make sure ot call FBPP.Start(config) before making any other FBPP calls. Please set FBPP.ShowInitWarning to false if you wish to hide this error.";
 
     private static FBPPConfig _config;
+
+    public static bool ShowInitWarning = true;
 
     private static FBPPFileModel _latestData;
     private static StringBuilder _sb = new StringBuilder();
@@ -29,6 +29,7 @@ public static class FBPP
     public static void Start(FBPPConfig config = null)
     {
         _config = config;
+        _latestData = GetSaveFile();
     }
 
     private static void CheckForInit()
@@ -36,7 +37,10 @@ public static class FBPP
         if (_config == null)
         {
             _config = new FBPPConfig();
-            Debug.LogWarning(DEFAULT_INIT_MESSAGE);
+            if (ShowInitWarning)
+            {
+                Debug.LogWarning(DEFAULT_INIT_MESSAGE);
+            }
         }
     }
 
@@ -160,6 +164,7 @@ public static class FBPP
     {
         WriteToSaveFile(data);
         _latestData = null;
+        _latestData = GetSaveFile();
     }
 
 
@@ -186,8 +191,15 @@ public static class FBPP
             }
             catch (ArgumentException e)
             {
-                Debug.LogException(new Exception("SAVE FILE IN WRONG FORMAT, CREATING NEW SAVE FILE : " + e.Message));
-                DeleteAll();
+                Debug.LogException(new Exception("FBPP Error loading save file: " + e.Message));
+                if (_config.OnLoadError.GetPersistentEventCount() > 0)
+                {
+                    _config.OnLoadError.Invoke();
+                }
+                else
+                {
+                    DeleteAll();
+                }
             }
         }
         return _latestData;
@@ -199,11 +211,7 @@ public static class FBPP
         return Path.Combine(_config.GetSaveFilePath(), _config.SaveFileName);
     }
 
-    public static string GetBackupFilePath()
-    {
-        CheckForInit();
-        return Path.Combine(_config.GetSaveFilePath(), BACKUP_PREFIX + _config.SaveFileName);
-    }
+  
 
     public static string GetSaveFileAsJson()
     {
@@ -235,11 +243,6 @@ public static class FBPP
         SaveSaveFile(true);
     }
 
-    public static void MakeBackup()
-    {
-        WriteToSaveFile(JsonUtility.ToJson(GetSaveFile()), true);
-    }
-
     private static void SaveSaveFile(bool manualSave = false)
     {
         if (_config.AutoSaveData || manualSave)
@@ -247,9 +250,9 @@ public static class FBPP
             WriteToSaveFile(JsonUtility.ToJson(GetSaveFile()));
         }
     }
-    private static void WriteToSaveFile(string data, bool backup = false)
+    private static void WriteToSaveFile(string data)
     {
-        var tw = new StreamWriter(backup ? GetBackupFilePath() : GetSaveFilePath());
+        var tw = new StreamWriter( GetSaveFilePath());
         if (_config.ScrambleSaveData)
         {
             data = DataScrambler(data);
