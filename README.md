@@ -170,14 +170,14 @@ var config = new FBPPConfig()
 };
 
 //Listen to the OnLoadErrorEvent
-config.OnLoadError.AddListener(()=>
+config.OnLoadError = ()=>
 {
     // Grab your backup from where ever you saved it
     string myBackupJson = GetMyBackupJson();
 
     // Restore that backup
     FBPP.OverwriteLocalSaveFile(myBackupJson);
-});
+};
 
 // Pass the config to FBPP
 FBPP.Start(config);

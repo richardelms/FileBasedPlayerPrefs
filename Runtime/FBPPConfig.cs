@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class FBPPConfig 
 {
@@ -18,7 +16,7 @@ public class FBPPConfig
 
     public string SaveFilePath = null;
 
-    public UnityEvent OnLoadError = new UnityEvent();
+    public Action OnLoadError;
 
     internal string GetSaveFilePath()
     {
@@ -26,3 +24,4 @@ public class FBPPConfig
     }
 
 }
+

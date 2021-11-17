@@ -178,7 +178,7 @@ public static class FBPP
             catch (ArgumentException e)
             {
                 Debug.LogException(new Exception("FBPP Error loading save file: " + e.Message));
-                if (_config.OnLoadError.GetPersistentEventCount() > 0)
+                if (_config.OnLoadError != null)
                 {
                     _config.OnLoadError.Invoke();
                 }
