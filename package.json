@@ -1,6 +1,6 @@
 {
   "name": "com.richtools.filebasedplayerprefs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "displayName": "File Based Player Prefs",
   "description": "PlayerPrefs substitute that saves player prefs data in a json file.",
   "unity": "2017.1",
