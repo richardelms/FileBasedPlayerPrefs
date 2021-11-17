@@ -13,7 +13,7 @@ public static class FBPP
         { }
     }
 
-    private const string DEFAULT_INIT_MESSAGE = "FBPP started with default settings. If this was intentional you can ignore this message. Otherwise make sure ot call FBPP.Start(config) before making any other FBPP calls. Please set FBPP.ShowInitWarning to false if you wish to hide this error.";
+    private const string INIT_EXCEPTION_MESSAGE = "Error, you must call FBPP.Start(FBPPConfig config) before trying to get or set saved data.";
 
     private static FBPPConfig _config;
 
@@ -26,7 +26,7 @@ public static class FBPP
 
     #region Init
 
-    public static void Start(FBPPConfig config = null)
+    public static void Start(FBPPConfig config)
     {
         _config = config;
         _latestData = GetSaveFile();
@@ -36,11 +36,7 @@ public static class FBPP
     {
         if (_config == null)
         {
-            _config = new FBPPConfig();
-            if (ShowInitWarning)
-            {
-                Debug.LogWarning(DEFAULT_INIT_MESSAGE);
-            }
+            throw new FBPPInitException(INIT_EXCEPTION_MESSAGE);
         }
     }
 
@@ -51,61 +47,51 @@ public static class FBPP
 
     public static void SetString(string key, string value = String_Empty)
     {
-        
         AddDataToSaveFile(key, value);
     }
 
     public static string GetString(string key, string defaultValue = String_Empty)
     {
-        
         return (string)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static void SetInt(string key, int value = default(int))
     {
-        
         AddDataToSaveFile(key, value);
     }
 
     public static int GetInt(string key, int defaultValue = default(int))
     {
-        
         return (int)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static void SetFloat(string key, float value = default(float))
     {
-        
         AddDataToSaveFile(key, value);
     }
 
     public static float GetFloat(string key, float defaultValue = default(float))
     {
-        
         return (float)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static void SetBool(string key, bool value = default(bool))
     {
-        
         AddDataToSaveFile(key, value);
     }
 
     public static bool GetBool(string key, bool defaultValue = default(bool))
     {
-        
         return (bool)GetDataFromSaveFile(key, defaultValue);
     }
 
     public static bool HasKey(string key)
     {
-        
         return GetSaveFile().HasKey(key);
     }
 
     public static bool HasKeyForString(string key)
     {
-        
         return GetSaveFile().HasKeyFromObject(key, string.Empty);
     }
 
@@ -237,7 +223,7 @@ public static class FBPP
         SaveSaveFile();
     }
 
-    public static void ManualySave()
+    public static void Save()
     {
         CheckForInit();
         SaveSaveFile(true);

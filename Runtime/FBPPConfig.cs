@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class FBPPConfig 
 {
     private const string DEFAULT_SAVE_FILE_NAME = "saveData.txt";
-    private const string DEFAULT_ENCRYPTION_SECRET = "th3C0untOfM0nt3Cr1$t0";
+    private const string DEFAULT_ENCRYPTION_SECRET = "encryption-secret-default";
 
     public string SaveFileName = DEFAULT_SAVE_FILE_NAME;
 
