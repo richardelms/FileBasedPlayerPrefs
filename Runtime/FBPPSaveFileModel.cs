@@ -3,7 +3,7 @@ using System.Linq;
 
 
 [Serializable]
-public class FileBasedPrefsSaveFileModel
+internal class FBPPFileModel
 {
     public StringItem[] StringData = new StringItem[0];
     public IntItem[] IntData = new IntItem[0];
@@ -62,7 +62,7 @@ public class FileBasedPrefsSaveFileModel
         }
     }
 
-    public object GetValueFromKey(string key, object defaultValue)
+    public object GetValueForKey(string key, object defaultValue)
     {
         if (defaultValue is string)
         {
