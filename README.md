@@ -2,7 +2,7 @@
 
 ### Overview
 
-This Unity library is designed to replace the standard Unity class, PlayerPrefs. 
+This Unity library is designed to replace the standard Unity PlayerPrefs. 
 
 The main difference being that it saves all records in JSON format to a text file.
 
@@ -14,7 +14,7 @@ Keys are type specific, meaning that if you save a string under the key "key1" i
 
 #### Platform Support
 
-Tested on Windows, OSX, Linux, iOS and Android.
+Tested on Windows, MacOS, Linux, iOS and Android.
 
 Supports any Unity version that can load UPM packages. This generally means 2017.1+
 
