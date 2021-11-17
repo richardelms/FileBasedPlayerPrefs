@@ -139,7 +139,6 @@ To save the data to disk, call the following method:
 
 ```
 FBPP.Save();
-
 ```
 
 ### Error handling and data backups
@@ -161,7 +160,6 @@ FBPP.GetSaveFileAsJson(); // returns the saved data as a json object in string f
 You should setup your error handling code when calling start like so:
 
 ```
-
 // enter your custom settings
 var config = new FBPPConfig()
 {
