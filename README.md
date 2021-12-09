@@ -181,4 +181,7 @@ config.OnLoadError = ()=>
 FBPP.Start(config);
 ```
 
+## Attribution
+
+You do not need to credit/attribute me or this lib in your game BUT please do let me know when your project it out, i'm always super happy to see what games are using it, maybe even send me a steam key if you are feeling generous ;)
 
