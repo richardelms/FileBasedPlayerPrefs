@@ -1,5 +1,7 @@
 # FBPP (File Based Player Prefs)
 
+[![openupm](https://img.shields.io/npm/v/com.richtools.filebasedplayerprefs?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.richtools.filebasedplayerprefs/)
+
 ### Overview
 
 This Unity library is designed to replace the standard Unity PlayerPrefs. 
