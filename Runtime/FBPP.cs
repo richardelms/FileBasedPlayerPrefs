@@ -29,6 +29,7 @@ public static class FBPP
     public static void Start(FBPPConfig config)
     {
         _config = config;
+        _latestData = null;
         _latestData = GetSaveFile();
     }
 
