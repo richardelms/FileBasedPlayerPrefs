@@ -182,8 +182,13 @@ config.OnLoadError = ()=>
 // Pass the config to FBPP
 FBPP.Start(config);
 ```
+## Support
+
+Please do not contact me asking for support. 
+This is a very simple plugin and the source is all here for you to debug.
+If it's not working, add some logging and make a dev build and look at the logs.
 
 ## Attribution
 
-You do not need to credit/attribute me or this lib in your game BUT please do let me know when your project is out, i'm always super happy to see what games are using it, maybe even send me a steam key if you are feeling generous ;)
+You do not need to credit/attribute me or this lib in your game
 
